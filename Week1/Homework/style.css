@@ -11,7 +11,6 @@ body {
   flex-direction: row;
   width: 100%;
   height: 100vh;
-  background-color: rgb(22, 22, 22);
 }
 
 button {
@@ -95,14 +94,18 @@ aside {
 }
 
 /* 3. 우측 정보 섹션 */
-.info {
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: blue;
+  background-color: rgb(27, 27, 27);
   gap: 10px;
+}
+
+main > * {
+  width: 95%;
 }
 
 /* 3. 히어로(소개) 섹션 */
@@ -113,7 +116,6 @@ aside {
   justify-content: baseline;
   margin-top: 80px; /* 일단 두고 마지막에 다 지우기 !! */
   padding: 0 50px;
-  width: 95%;
   height: 300px;
   gap: 40px;
   background-color: rgb(238, 238, 238);
@@ -169,4 +171,32 @@ button.glad {
 button.exciting {
   color: white;
   background-color: black;
+}
+
+/* 4. 스킬 태그 섹션 */
+.skill {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.skill > h1 {
+  color: white;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  display: flex;
+  margin-top: 16px;
+  gap: 10px;
+}
+
+.tag {
+  border-radius: 20px;
+  padding: 5px 12px;
+  background-color: rgb(223, 223, 223);
+  font-size: 1rem;
+  font-weight: 400;
 }
