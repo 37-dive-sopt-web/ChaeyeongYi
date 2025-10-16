@@ -11,6 +11,7 @@ body {
   flex-direction: column;
   width: 100%;
   height: 100vh;
+  background-color: rgb(170, 170, 170);
 }
 
 button {
@@ -94,10 +95,43 @@ div.middle {
   display: flex;
 }
 /* 2. 좌측 사이드바 */
-aside {
-  width: 16%;
-  height: 100%;
-  background-color: yellow;
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: fixed;
+  width: 200px;
+  height: 280px;
+  margin-top: 80px;
+  margin-left: 10px;
+  padding: 0 10px 0 10px;
+  background-color: rgb(190, 190, 190);
+  border-radius: 10px;
+}
+
+nav a {
+  display: flex;
+  color: rgb(41, 41, 41);
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  height: 40px;
+  padding-left: 20px;
+  align-items: center;
+  border-radius: 20px;
+}
+
+nav a#nav4 {
+  border-radius: 20px 20px 10px 10px;
+}
+
+nav a#nav4 {
+  border-radius: 10px 10px 20px 20px;
+}
+nav a:hover {
+  color: black;
+  background-color: rgb(129, 129, 129);
+  transition: all 5ms ease-in;
 }
 
 /* 3. 우측 정보 섹션 */
@@ -107,8 +141,8 @@ main {
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: rgb(27, 27, 27);
   gap: 10px;
+  margin-left: 200px;
 }
 
 main > * {
