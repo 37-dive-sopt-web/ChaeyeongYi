@@ -18,6 +18,10 @@ button {
   cursor: pointer;
 }
 
+h1#subheading {
+  color: white;
+}
+
 /* 1. header */
 header {
   display: flex;
@@ -183,10 +187,6 @@ button.exciting {
   margin: 20px 0;
 }
 
-.skill > h1 {
-  color: white;
-}
-
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -208,10 +208,6 @@ button.exciting {
   display: flex;
   flex-direction: column;
   margin: 20px 0;
-}
-
-.cardSection > h1 {
-  color: white;
 }
 
 .cardWrapper {
@@ -344,6 +340,54 @@ div.card:hover {
   h2 {
     font-size: 2rem;
   }
+}
+
+/* 사진첩(가로 스크롤 뷰) */
+.gallery {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.pictureWrapper {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  max-width: 1300px;
+}
+
+.carousel {
+  display: flex;
+  animation: scroll-event 20s linear infinite;
+  width: max-content;
+  gap: 20px;
+}
+
+@keyframes scroll-event {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.carousel:hover {
+  animation-play-state: paused;
+}
+
+.carousel img {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  object-fit: cover;
+  white-space: nowrap;
+}
+
+.carousel img:hover {
+  transform: scale(1.03);
+  transition: all 0.3s ease-in-out;
 }
 
 /* 푸터 */
