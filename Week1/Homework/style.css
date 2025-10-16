@@ -94,6 +94,8 @@ header p {
 
 div.middle {
   display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 /* 2. 좌측 사이드바 */
 nav {
@@ -143,7 +145,7 @@ main {
   width: 100%;
   height: 100%;
   gap: 10px;
-  margin-left: 200px;
+  padding-left: 200px;
 }
 
 main > * {
