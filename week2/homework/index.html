@@ -85,7 +85,9 @@
               <td><input type="checkbox" /></td>
               <td>이채영</td>
               <td>ChaeyeongYi</td>
-              <td>hummingbbird</td>
+              <td>
+                <a id="github" href="#">hummingbbird</a>
+              </td>
               <td>여성</td>
               <td>YB</td>
               <td>5</td>
@@ -94,7 +96,56 @@
           </tbody>
         </table>
       </section>
+      <!-- 멤버 추가 모달 -->
+      <section class="add-modal">
+        <h3>멤버 추가</h3>
+        <h4 class="back-btn">X</h4>
+        <div class="addModalWrapper">
+          <p>이름</p>
+          <input class="name-input" placeholder="이름을 입력하세요" />
+          <p>영문 이름</p>
+          <input class="eng-name-input" placeholder="영문 이름을 입력하세요" />
+          <p>깃허브</p>
+          <input
+            class="github-input"
+            placeholder="깃허브 아이디를 입력하세요"
+          />
+          <div class="two-content-wrapper">
+            <div>
+              <p>성별</p>
+              <select class="gender-select">
+                <option value="entire">전체</option>
+                <option value="female">여성</option>
+                <option value="male">남성</option>
+              </select>
+            </div>
+            <div>
+              <p>역할</p>
+              <select class="role-select">
+                <option value="entire">전체</option>
+                <option value="YB">YB</option>
+                <option value="OB">OB</option>
+              </select>
+            </div>
+          </div>
+          <div class="two-content-wrapper">
+            <div>
+              <p>금잔디조</p>
+              <input
+                class="geumjandi-input"
+                placeholder="금잔디조를 입력하세요 (1~9)"
+              />
+            </div>
+            <div>
+              <p>나이</p>
+              <input class="age-input" placeholder="나이를 입력하세요" />
+            </div>
+          </div>
+          <button class="add-modal-btn" type="submit">추가</button>
+        </div>
+      </section>
     </main>
+    
     <script type="module" src="index.js"></script>
   </body>
 </html>

@@ -23,11 +23,6 @@ main {
   margin-top: 70px;
 }
 
-/* button {
-  border: none;
-  cursor: pointer;
-} */
-
 button {
   height: 80%;
   border: none;
@@ -112,12 +107,10 @@ header :nth-child(3) {
 
     &:nth-child(3) {
       grid-template-columns: repeat(3, 100px 1fr);
-      gap: 15px;
     }
 
     &:nth-child(4) {
       grid-template-columns: repeat(2, 100px 1fr);
-      gap: 15px;
     }
 
     &:nth-child(5) {
@@ -149,14 +142,60 @@ header :nth-child(3) {
   }
 }
 
-th {
-  background-color: rgb(211, 211, 211);
-  padding: 10px 0;
+.member-list {
+  th {
+    background-color: rgb(211, 211, 211);
+    padding: 10px 0;
+  }
+
+  td {
+    text-align: center;
+    padding: 7px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  a {
+    color: pink;
+  }
 }
 
-td {
-  text-align: center;
-  padding: 7px 0;
-  border-bottom: 1px solid #e0e0e0;
+.add-modal {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 10px;
+
+  .back-btn {
+    position: relative;
+    left: 98%;
+    top: -3%;
+  }
 }
 
+.addModalWrapper {
+  > * {
+    width: 100%;
+  }
+
+  input,
+  select {
+    margin-bottom: 10px;
+  }
+
+  .add-modal-btn {
+    height: 35px;
+  }
+}
+
+.two-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+
+  * {
+    width: 100%;
+  }
+}
