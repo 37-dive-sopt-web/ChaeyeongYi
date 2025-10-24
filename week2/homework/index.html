@@ -18,35 +18,46 @@
         <div class="filterWrapper">
           <div>
             <p>이름</p>
-            <input class="nameInput" placeholder="이름을 입력하세요" />
+            <input class="name-input" placeholder="이름을 입력하세요" />
           </div>
           <div>
             <p>영문 이름</p>
-            <input class="engNameInput" placeholder="영문 이름을 입력하세요" />
+            <input
+              class="eng-name-input"
+              placeholder="영문 이름을 입력하세요"
+            />
           </div>
           <div>
             <p>깃허브</p>
             <input
-              class="githubInput"
+              class="github-input"
               placeholder="깃허브 아이디를 입력하세요"
             />
             <p>성별</p>
-            <input class="githubInput" placeholder="성별을 입력하세요" />
+            <select class="gender-select">
+              <option value="entire">전체</option>
+              <option value="female">여성</option>
+              <option value="male">남성</option>
+            </select>
             <p>역할</p>
-            <input class="githubInput" placeholder="역할을 입력하세요" />
+            <select class="role-select">
+              <option value="entire">전체</option>
+              <option value="YB">YB</option>
+              <option value="OB">OB</option>
+            </select>
           </div>
           <div>
             <p>금잔디조</p>
             <input
-              class="geumjandiInput"
+              class="geumjandi-input"
               placeholder="금잔디조를 입력하세요 (1~9)"
             />
-            <p>나이를 입력하세요</p>
-            <input class="ageInput" placeholder="나이를 입력하세요" />
+            <p>나이</p>
+            <input class="age-input" placeholder="나이를 입력하세요" />
           </div>
           <div class="buttonWrapper">
-            <button type="submit">적용</button>
-            <button type="reset">초기화</button>
+            <button class="implement-btn" type="submit">적용</button>
+            <button class="reset-btn" type="reset">초기화</button>
           </div>
         </div>
       </section>
