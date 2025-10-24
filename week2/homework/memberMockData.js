@@ -1,4 +1,4 @@
-export const members = [
+export const memberMockData = [
   {
     id: 1,
     name: "권동희",

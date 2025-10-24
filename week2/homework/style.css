@@ -21,6 +21,7 @@ main {
   align-items: center;
   justify-content: center;
   margin-top: 70px;
+  padding-bottom: 70px;
 }
 
 button {
@@ -51,7 +52,6 @@ select {
   display: flex;
   flex-direction: column;
   width: 95%;
-  height: 300px;
   margin-top: 20px;
   padding: 10px 20px;
   background-color: white;
@@ -121,6 +121,10 @@ header :nth-child(3) {
 
   p {
     font-weight: bold;
+  }
+
+  .left-space {
+    margin-left: 15px;
   }
 }
 
