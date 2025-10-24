@@ -23,9 +23,26 @@ main {
   margin-top: 70px;
 }
 
-button {
+/* button {
   border: none;
   cursor: pointer;
+} */
+
+button {
+  height: 80%;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #222222;
+  &:hover {
+    background-color: #444444;
+  }
+
+  &:active {
+    background-color: #333333;
+  }
 }
 
 input,
@@ -33,6 +50,18 @@ select {
   padding: 10px;
   border-radius: 4px;
   border: 1px solid rgb(177, 177, 177);
+}
+
+.sectionContainer {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  height: 300px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 10px;
+  gap: 10px;
 }
 
 /* header */
@@ -66,17 +95,6 @@ header :nth-child(3) {
 }
 
 /* 검색 필터 */
-.filterSection {
-  display: flex;
-  flex-direction: column;
-  width: 95%;
-  height: 300px;
-  margin-top: 20px;
-  padding: 10px;
-  background-color: white;
-  border-radius: 10px;
-}
-
 .filterWrapper {
   display: grid;
   height: 250px;
@@ -94,10 +112,12 @@ header :nth-child(3) {
 
     &:nth-child(3) {
       grid-template-columns: repeat(3, 100px 1fr);
+      gap: 15px;
     }
 
     &:nth-child(4) {
       grid-template-columns: repeat(2, 100px 1fr);
+      gap: 15px;
     }
 
     &:nth-child(5) {
@@ -107,23 +127,36 @@ header :nth-child(3) {
   }
 
   p {
-    padding-left: 10px;
     font-weight: bold;
-  }
-
-  button {
-    height: 80%;
-    border-radius: 10px;
-    color: white;
-    font-weight: bold;
-    background-color: #222222;
-
-    &:hover {
-      background-color: #444444;
-    }
-
-    &:active {
-      background-color: #333333;
-    }
   }
 }
+
+/* 리스트 */
+.listWrapper {
+  display: flex;
+  width: 100%;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buttonWrapper {
+  > button {
+    padding: 8px 15px;
+  }
+}
+
+th {
+  background-color: rgb(211, 211, 211);
+  padding: 10px 0;
+}
+
+td {
+  text-align: center;
+  padding: 7px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+

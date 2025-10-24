@@ -13,7 +13,7 @@
       <p>🥦SOPT 37th WEB 이채영🥦</p>
     </header>
     <main>
-      <section class="filterSection">
+      <section class="sectionContainer">
         <h3>검색 필터</h3>
         <div class="filterWrapper">
           <div>
@@ -55,11 +55,44 @@
             <p>나이</p>
             <input class="age-input" placeholder="나이를 입력하세요" />
           </div>
-          <div class="buttonWrapper">
+          <div>
             <button class="implement-btn" type="submit">적용</button>
             <button class="reset-btn" type="reset">초기화</button>
           </div>
         </div>
+      </section>
+      <section class="sectionContainer">
+        <div class="titleWrapper">
+          <h3>37기 웹 파트 목록</h3>
+          <div class="buttonWrapper">
+            <button class="delete-btn" type="button">선택 삭제</button>
+            <button class="add-btn" type="button">추가</button>
+          </div>
+        </div>
+        <table class="member-list">
+          <thead>
+            <th><input class="check-all" type="checkbox" /></th>
+            <th>이름</th>
+            <th>영문 이름</th>
+            <th>깃허브</th>
+            <th>성별</th>
+            <th>역할</th>
+            <th>금잔디조</th>
+            <th>나이</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>이채영</td>
+              <td>ChaeyeongYi</td>
+              <td>hummingbbird</td>
+              <td>여성</td>
+              <td>YB</td>
+              <td>5</td>
+              <td>24</td>
+            </tr>
+          </tbody>
+        </table>
       </section>
     </main>
     <script type="module" src="index.js"></script>
