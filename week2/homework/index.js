@@ -14,7 +14,7 @@ const geumjandiInput = document.querySelector(".geumjandi-input");
 const ageInput = document.querySelector(".age-input");
 const implementBtn = document.querySelector(".implement-btn");
 const resetBtn = document.querySelector(".reset-btn");
-
+const checkAllInput = document.querySelector(".check-all");
 const deleteBtn = document.querySelector(".delete-btn");
 const addBtn = document.querySelector(".add-btn");
 // -----------------------------------------------------------------
@@ -30,7 +30,7 @@ const updateTable = (data = members) => {
   data.forEach((member) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-    <td><input type="checkbox" member-id="${member.id}"/></td>
+    <td><input type="checkbox" id="${member.id}"/></td>
     <td>${member.name}</td>
     <td>${member.englishName}</td>
     <td>
@@ -114,7 +114,25 @@ function implementFilter() {
 implementBtn.addEventListener("click", implementFilter);
 
 // TODO: 체크 박스 선택 삭제
-// TODO: 체크 박스 전체 삭제
+const deleteRow = () => {
+  // 1. 선택된 row의 id 저장
+  const checkedBoxes = document.querySelectorAll(
+    "td > input[type=checkbox]:checked"
+  );
+  const checkedIdList = [...checkedBoxes].map((item) => item.id);
+
+  // 2. 업데이트
+  const deletedData = members.filter((item) => {
+    return !checkedIdList.includes(item.id.toString());
+  });
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(deletedData));
+  updateTable(deletedData);
+  return;
+};
+deleteBtn.addEventListener("click", deleteRow);
+
+// TODO: 체크 박스 전체 선택
 // TODO: 데이터 추가
 // localStorage.setItem(MEMEBER_ID_KEY, newId);
 // TODO: 모달 관리
