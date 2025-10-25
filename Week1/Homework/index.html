@@ -3,9 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="Description"
+      content="Welcome to yong's blog! 37기 웨비들 !! 재밌는 웹계인 만들어봅시다"
+    />
+    <meta property="og:type" content="website" />
     <title>yong's blog</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
   </head>
 
   <body>
@@ -16,7 +20,7 @@
         src="./images/profileImg.jpg"
         alt="프로필 이미지"
       />
-      <div class="title">
+      <div class="headerTitle">
         <h3>이채영</h3>
         <p>기죽지 말고 살아라!</p>
       </div>
@@ -46,7 +50,7 @@
       </nav>
       <main>
         <!-- 히어로(소개) 섹션 -->
-        <section class="hero" id="hero">
+        <section id="hero">
           <img src="./images/mainProfileImg.jpg" alt="메인 프로필 이미지" />
           <div>
             <h1>Welcome to yong's blog!</h1>
@@ -59,8 +63,8 @@
         </section>
 
         <!-- 스킬 태그 섹션 -->
-        <section class="skill" id="skill">
-          <h1 id="subheading">🥦 My skills & interests</h1>
+        <section id="skill">
+          <h2 class="subheading">🥦 My skills & interests</h2>
           <div class="tags">
             <div class="tag">HTML</div>
             <div class="tag">CSS</div>
@@ -78,15 +82,15 @@
         </section>
 
         <!-- 카드 섹션 -->
-        <section class="hobbySection" id="hobby">
-          <h1 id="subheading">🎈 My Hobby Zone</h1>
+        <section id="hobby">
+          <h2 class="subheading">🎈 My Hobby Zone</h2>
           <div class="cardWrapper">
             <div class="card">
               <img src="./images/cards/monster.webp" alt="영화 괴물" />
               <div class="info">
                 <div class="title">
                   <h2>괴물</h2>
-                  <p class="icon" id="movieIcon">🎥</p>
+                  <p class="movieIcon">🎥</p>
                 </div>
                 <p class="content">저의 인생영화입니다. 흑흑</p>
               </div>
@@ -99,7 +103,7 @@
               <div class="info">
                 <div class="title">
                   <h2>린다 린다 린다</h2>
-                  <p class="icon" id="movieIcon">🎥</p>
+                  <p class="movieIcon">🎥</p>
                 </div>
                 <p class="content">비오는 늦여름에 보기 좋은 영화</p>
               </div>
@@ -109,7 +113,7 @@
               <div class="info">
                 <div class="title">
                   <h2>체인소 맨</h2>
-                  <p class="icon" id="movieIcon">🎥</p>
+                  <p class="movieIcon">🎥</p>
                 </div>
                 <p class="content">
                   감히 올해 최고의 애니메이션 영화라 말해봅니다
@@ -121,7 +125,7 @@
               <div class="info">
                 <div class="title">
                   <h2>금붕어</h2>
-                  <p class="icon" id="songIcon">🎵</p>
+                  <p class="songIcon">🎵</p>
                 </div>
                 <p class="content">
                   이 노래를 들으며 방방 뛰면 기분이 좋아져요
@@ -133,7 +137,7 @@
               <div class="info">
                 <div class="title">
                   <h2>60's cardin</h2>
-                  <p class="icon" id="songIcon">🎵</p>
+                  <p class="songIcon">🎵</p>
                 </div>
                 <p class="content">이 노래에 맞춰 체조를 해보아요</p>
               </div>
@@ -143,7 +147,7 @@
               <div class="info">
                 <div class="title">
                   <h2>긴긴밤</h2>
-                  <p class="icon" id="bookIcon">📙</p>
+                  <p class="bookIcon">📙</p>
                 </div>
                 <p class="content">
                   청소년 소설이지만 저를 눈물 짓게 한 어마어마한 책
@@ -158,7 +162,7 @@
               <div class="info">
                 <div class="title">
                   <h2>번역:황석희</h2>
-                  <p class="icon" id="bookIcon">📙</p>
+                  <p class="bookIcon">📙</p>
                 </div>
                 <p class="content">피식 피식 웃음나오는 재미난 에세이</p>
               </div>
@@ -166,8 +170,8 @@
           </div>
         </section>
         <!-- 사진첩(가로 스크롤 뷰) -->
-        <section class="gallery" id="ganadi">
-          <h1 id="subheading">📷 가나디를 보고 가세요</h1>
+        <section id="gallery">
+          <h2 class="subheading">📷 가나디를 보고 가세요</h2>
           <div class="pictureWrapper">
             <div class="carousel">
               <img src="./images/ganadi/vGanadi.jpeg" alt="브이하는 가나디" />
@@ -215,13 +219,11 @@
             </div>
           </div>
         </section>
-
-        <!-- 네비게이션 -->
       </main>
     </div>
     <!-- 푸터 -->
     <footer>
-      <h3>github 친구해욥 ~</h3>
+      <p>github 친구해욥 ~</p>
       <a href="https://youtu.be/Xa5AeVWT2AY?si=yqt7Ywj-0YZQNvWC"
         >🎵오늘의 추천곡: 페퍼톤스 - 라이더스🎵
       </a>

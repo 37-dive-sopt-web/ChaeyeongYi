@@ -20,7 +20,11 @@ button {
   cursor: pointer;
 }
 
-h1#subheading {
+img {
+  object-fit: cover;
+}
+
+h1.subheading {
   color: rgb(63, 63, 63);
 }
 
@@ -45,7 +49,7 @@ header p {
   font-size: 0.8rem;
 }
 
-.title {
+.headerTitle {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,7 +59,6 @@ header p {
 .profileImg {
   width: 40px;
   height: 40px;
-  object-fit: cover;
   border-radius: 100px;
 }
 
@@ -153,7 +156,7 @@ main > * {
 }
 
 /* 3. 히어로(소개) 섹션 */
-.hero {
+#hero {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -164,29 +167,29 @@ main > * {
   gap: 40px;
   background-color: rgb(247, 247, 247);
   border-radius: 30px;
+  scroll-margin-top: 30px;
 }
 
-.hero > img {
+#hero > img {
   width: 250px;
   height: 250px;
-  object-fit: cover;
   border-radius: 100%;
 }
 
-.hero > img:hover {
+#hero > img:hover {
   transform: scale(1.03);
   box-shadow: 0 0 6px #868686;
   transition: all 0.3s ease-in-out;
 }
 
-.hero > div {
+#hero > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: start;
 }
 
-.hero p {
+#hero p {
   font-size: 1rem;
   color: #868686;
 }
@@ -217,15 +220,12 @@ button.exciting {
   background-color: black;
 }
 
-#hero {
-  scroll-margin-top: 30px;
-}
-
 /* 4. 스킬 태그 섹션 */
-.skill {
+#skill {
   display: flex;
   flex-direction: column;
   margin: 20px 0;
+  scroll-margin-top: 60px;
 }
 
 .tags {
@@ -245,16 +245,12 @@ button.exciting {
   font-size: 1rem;
   font-weight: 400;
 }
-
-#skill {
-  scroll-margin-top: 60px;
-}
-
 /* 5. 카드 섹션 */
-.hobbySection {
+#hobby {
   display: flex;
   flex-direction: column;
   margin: 20px 0;
+  scroll-margin-top: 70px;
 }
 
 .cardWrapper {
@@ -283,7 +279,6 @@ div.card:hover {
 .card > img {
   width: 100%;
   height: 50%;
-  object-fit: cover;
   border-radius: 12px 12px 0 0;
 }
 
@@ -301,10 +296,11 @@ div.card:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   height: 50%;
 }
 
-.card .icon {
+.title > p {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -314,31 +310,31 @@ div.card:hover {
   padding-bottom: 3px;
 }
 
-#movieIcon {
+.movieIcon {
   background-color: rgb(206, 241, 255);
 }
 
-#movieIcon:hover {
+.movieIcon:hover {
   transform: scale(1.03);
   background-color: rgb(166, 229, 253);
   transition: all 0.3s ease-in-out;
 }
 
-#songIcon {
+.songIcon {
   background-color: rgb(229, 206, 255);
 }
 
-#songIcon:hover {
+.songIcon:hover {
   transform: scale(1.03);
   background-color: rgb(218, 187, 253);
   transition: all 0.3s ease-in-out;
 }
 
-#bookIcon {
+.bookIcon {
   background-color: rgb(255, 242, 165);
 }
 
-#bookIcon:hover {
+.bookIcon:hover {
   transform: scale(1.03);
   background-color: rgb(255, 238, 138);
   transition: all 0.3s ease-in-out;
@@ -347,10 +343,6 @@ div.card:hover {
 .card .content {
   font-size: 0.8rem;
   color: rgb(78, 78, 78);
-}
-
-#hobby {
-  scroll-margin-top: 70px;
 }
 
 /* 카드 섹션 반응형 구현 */
@@ -394,7 +386,7 @@ div.card:hover {
 }
 
 /* 사진첩(가로 스크롤 뷰) */
-.gallery {
+#gallery {
   display: flex;
   flex-direction: column;
   margin: 20px 0;
@@ -432,7 +424,6 @@ div.card:hover {
   width: 200px;
   height: 200px;
   border-radius: 15px;
-  object-fit: cover;
   white-space: nowrap;
 }
 
@@ -453,7 +444,7 @@ footer {
   background-color: rgb(255, 255, 255);
 }
 
-footer > h3 {
+footer > p {
   padding-bottom: 10px;
 }
 
