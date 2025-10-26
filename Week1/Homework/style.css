@@ -257,16 +257,16 @@ button.exciting {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  height: 600px;
-  gap: 25px;
+  /* height: 600px; */
+  gap: 15px;
   margin-top: 16px;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  width: 18%;
-  height: 48%;
+  width: 230px;
+  aspect-ratio: calc(1 / 1.4);
   border-radius: 12px;
 }
 
@@ -310,6 +310,15 @@ button.exciting {
   padding-bottom: 3px;
 }
 
+.title > .cardTitle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: 80%;
+}
+
 .movieIcon {
   background-color: rgb(206, 241, 255);
 }
@@ -347,41 +356,42 @@ button.exciting {
 
 /* 카드 섹션 반응형 구현 */
 @media (max-width: 1500px) {
-  .cardWrapper {
-    height: 700px;
-  }
   .card {
     width: 23%;
   }
   .card .content {
     font-size: 1rem;
   }
+  .card .cardTitle {
+    font-size: 1.4rem;
+  }
 }
 
 @media (max-width: 1300px) {
-  .cardWrapper {
-    height: 800px;
-  }
   .card {
     width: 30%;
   }
   .card .content {
     font-size: 1.1rem;
   }
+  .card .cardTitle {
+    font-size: 1.6rem;
+  }
 }
 
 @media (max-width: 1100px) {
-  .cardWrapper {
+  /* .cardWrapper {
     height: 900px;
-  }
+  } */
   .card {
     width: 48%;
   }
   .card .content {
     font-size: 1.3rem;
   }
-  h2 {
-    font-size: 2rem;
+
+  .card .cardTitle {
+    font-size: 1.8rem;
   }
 }
 
@@ -389,7 +399,7 @@ button.exciting {
 #gallery {
   display: flex;
   flex-direction: column;
-  margin: 20px 0;
+  padding: 20px 0;
 }
 
 .pictureWrapper {
