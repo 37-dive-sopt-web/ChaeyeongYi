@@ -28,7 +28,7 @@ const modalGeumjandiInput = document.querySelector(".modal-geumjandi-input");
 const modalAgeInput = document.querySelector(".modal-age-input");
 const modalCloseBtn = document.querySelector(".close-btn");
 const addRowBtn = document.querySelector(".add-row-btn");
-
+const modalBackdrop = document.querySelector(".modal");
 // localStorage 데이터 get
 let members = JSON.parse(localStorage.getItem(STORAGE_KEY));
 let newId = localStorage.getItem(MEMEBER_ID_KEY);
@@ -186,3 +186,10 @@ const addRow = () => {
   }
 };
 addRowBtn.addEventListener("click", addRow);
+
+// 모달 백드롭 클릭 시 close
+modalBackdrop.addEventListener("click", (event) => {
+  if (event.target === modalBackdrop) {
+    closeModal();
+  }
+});

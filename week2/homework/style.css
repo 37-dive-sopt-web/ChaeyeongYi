@@ -180,6 +180,7 @@ header :nth-child(3) {
 .modal.open {
   display: block;
 }
+
 .modal-wrapper {
   display: flex;
   flex-direction: column;
