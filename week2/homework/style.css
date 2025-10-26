@@ -12,7 +12,7 @@ body {
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  background-color: rgb(228, 228, 228);
+  background-color: rgb(240, 240, 240);
 }
 
 main {
@@ -163,23 +163,51 @@ header :nth-child(3) {
   }
 }
 
-.add-modal {
+/* 멤버 추가 모달 */
+
+.modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.modal.open {
+  display: block;
+}
+.modal-wrapper {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: 30%;
+  left: 30%;
   width: 40%;
   margin-top: 20px;
-  padding: 10px 20px;
+  padding: 15px 20px;
   background-color: white;
   border-radius: 10px;
+}
 
-  .back-btn {
-    position: relative;
-    left: 98%;
-    top: -3%;
+.top-div {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+
+  .close-btn {
+    font-size: 1rem;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    margin-top: 4px;
   }
 }
 
-.addModalWrapper {
+.content-wrapper {
   > * {
     width: 100%;
   }
@@ -189,7 +217,7 @@ header :nth-child(3) {
     margin-bottom: 10px;
   }
 
-  .add-modal-btn {
+  .add-row-btn {
     height: 35px;
   }
 }

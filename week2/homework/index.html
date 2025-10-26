@@ -70,8 +70,8 @@
         <div class="titleWrapper">
           <h3>37기 웹 파트 목록</h3>
           <div class="buttonWrapper">
-            <button class="delete-btn" type="button">선택 삭제</button>
-            <button class="add-btn" type="button">추가</button>
+            <button class="delete-btn" type="submit">선택 삭제</button>
+            <button class="open-modal-btn" type="button">추가</button>
           </div>
         </div>
         <table class="member-list">
@@ -91,50 +91,66 @@
     </main>
 
     <!-- 멤버 추가 모달 -->
-    <!-- <section class="add-modal">
-      <h3>멤버 추가</h3>
-      <h4 class="back-btn">X</h4>
-      <div class="addModalWrapper">
-        <p>이름</p>
-        <input type="text" class="name-input" placeholder="이름을 입력하세요" />
-        <p>영문 이름</p>
-        <input type="text" class="eng-name-input" placeholder="영문 이름을 입력하세요" />
-        <p>깃허브</p>
-        <input type="text" class="github-input" placeholder="깃허브 아이디를 입력하세요" />
-        <div class="two-content-wrapper">
-          <div>
-            <p>성별</p>
-            <select class="gender-select">
-              <option value="entire">전체</option>
-              <option value="female">여성</option>
-              <option value="male">남성</option>
-            </select>
-          </div>
-          <div>
-            <p>역할</p>
-            <select class="role-select">
-              <option value="entire">전체</option>
-              <option value="YB">YB</option>
-              <option value="OB">OB</option>
-            </select>
-          </div>
+    <aside class="modal">
+      <div class="modal-wrapper">
+        <div class="top-div">
+          <h3>멤버 추가</h3>
+          <button type="button" class="close-btn">X</button>
         </div>
-        <div class="two-content-wrapper">
-          <div>
-            <p>금잔디조</p>
-            <input
-              class="geumjandi-input"
-              placeholder="금잔디조를 입력하세요 (1~9)"
-            />
+        <div class="content-wrapper">
+          <p>이름</p>
+          <input
+            type="text"
+            class="modal-name-input"
+            placeholder="이름을 입력하세요"
+          />
+          <p>영문 이름</p>
+          <input
+            type="text"
+            class="modal-eng-name-input"
+            placeholder="영문 이름을 입력하세요"
+          />
+          <p>깃허브</p>
+          <input
+            type="text"
+            class="modal-github-input"
+            placeholder="깃허브 아이디를 입력하세요"
+          />
+          <div class="two-content-wrapper">
+            <div>
+              <p>성별</p>
+              <select class="modal-gender-select">
+                <option value="entire">전체</option>
+                <option value="female">여성</option>
+                <option value="male">남성</option>
+              </select>
+            </div>
+            <div>
+              <p>역할</p>
+              <select class="modal-role-select">
+                <option value="entire">전체</option>
+                <option value="YB">YB</option>
+                <option value="OB">OB</option>
+              </select>
+            </div>
           </div>
-          <div>
-            <p>나이</p>
-            <input class="age-input" placeholder="나이를 입력하세요" />
+          <div class="two-content-wrapper">
+            <div>
+              <p>금잔디조</p>
+              <input
+                class="modal-geumjandi-input"
+                placeholder="금잔디조를 입력하세요 (1~9)"
+              />
+            </div>
+            <div>
+              <p>나이</p>
+              <input class="modal-age-input" placeholder="나이를 입력하세요" />
+            </div>
           </div>
+          <button class="add-row-btn" type="submit">추가</button>
         </div>
-        <button class="add-modal-btn" type="submit">추가</button>
       </div>
-    </section> -->
+    </aside>
     <script type="module" src="index.js"></script>
   </body>
 </html>
