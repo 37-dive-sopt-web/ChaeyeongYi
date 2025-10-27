@@ -1,0 +1,471 @@
+/* 공통 스타일 적용 */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(228, 228, 228);
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+img {
+  object-fit: cover;
+}
+
+h1.subheading {
+  color: rgb(63, 63, 63);
+}
+
+/* 1. header */
+header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 10px;
+}
+
+header p {
+  font-size: 0.8rem;
+}
+
+.headerTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+}
+
+.profileImg:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 6px #5f5e5e;
+  transition: 0.2s ease-in-out;
+}
+
+.socials {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  gap: 5px;
+}
+
+.socials a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 30px;
+  background-color: rgb(76, 76, 76);
+}
+
+.socials > a:hover {
+  background-color: rgb(0, 0, 0);
+  transform: translateY(-3px);
+  transition: transform 0.2s ease-in-out;
+}
+
+.socials img {
+  width: 13px;
+}
+
+.middle {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+/* 2. 좌측 사이드바 */
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: fixed;
+  width: 200px;
+  height: 260px;
+  top: 80px;
+  left: 10px;
+  padding: 0 10px 0 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+nav a {
+  display: flex;
+  color: rgb(41, 41, 41);
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  height: 45px;
+  padding-left: 20px;
+  align-items: center;
+  border-radius: 20px;
+}
+
+nav a#nav1 {
+  border-radius: 20px 20px 10px 10px;
+}
+
+nav a#nav4 {
+  border-radius: 10px 10px 20px 20px;
+}
+nav a:hover {
+  color: black;
+  background-color: rgb(214, 214, 214);
+  transition: all 5ms ease-in;
+}
+
+/* 3. 우측 정보 섹션 */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 10px;
+  padding-left: 200px;
+}
+
+main > * {
+  width: 95%;
+}
+
+/* 3. 히어로(소개) 섹션 */
+#hero {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: baseline;
+  margin-top: 40px;
+  padding: 0 50px;
+  height: 300px;
+  gap: 40px;
+  background-color: rgb(247, 247, 247);
+  border-radius: 30px;
+  scroll-margin-top: 30px;
+}
+
+#hero > img {
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+}
+
+#hero > img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 6px #868686;
+  transition: all 0.3s ease-in-out;
+}
+
+#hero > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+#hero p {
+  font-size: 1rem;
+  color: #868686;
+}
+
+.buttons {
+  display: flex;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.buttons button {
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.buttons button:hover {
+  transform: translateY(-2px) scale(1.03);
+  transition: all 0.2s ease-in-out;
+}
+
+button.glad {
+  background-color: white;
+  box-shadow: 0 0 0 1px black inset;
+}
+
+button.exciting {
+  color: white;
+  background-color: black;
+}
+
+/* 4. 스킬 태그 섹션 */
+#skill {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  scroll-margin-top: 60px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 16px;
+  gap: 10px;
+}
+
+.tag {
+  border-radius: 20px;
+  padding: 5px 12px;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid white;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+}
+/* 5. 카드 섹션 */
+#hobby {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  scroll-margin-top: 70px;
+}
+
+.cardWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* height: 600px; */
+  gap: 15px;
+  margin-top: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 230px;
+  aspect-ratio: calc(1 / 1.4);
+  border-radius: 12px;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 6px #868686;
+  transition: all 0.3s ease-in-out;
+}
+
+.card > img {
+  width: 100%;
+  height: 50%;
+  border-radius: 12px 12px 0 0;
+}
+
+.card > .info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 50%;
+  padding: 0 10px;
+  border-radius: 0 0 12px 12px;
+  background-color: white;
+}
+
+.card .title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50%;
+}
+
+.title > p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  padding-bottom: 3px;
+}
+
+.title > .cardTitle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: 80%;
+}
+
+.movieIcon {
+  background-color: rgb(206, 241, 255);
+}
+
+.movieIcon:hover {
+  transform: scale(1.03);
+  background-color: rgb(166, 229, 253);
+  transition: all 0.3s ease-in-out;
+}
+
+.songIcon {
+  background-color: rgb(229, 206, 255);
+}
+
+.songIcon:hover {
+  transform: scale(1.03);
+  background-color: rgb(218, 187, 253);
+  transition: all 0.3s ease-in-out;
+}
+
+.bookIcon {
+  background-color: rgb(255, 242, 165);
+}
+
+.bookIcon:hover {
+  transform: scale(1.03);
+  background-color: rgb(255, 238, 138);
+  transition: all 0.3s ease-in-out;
+}
+
+.card .content {
+  font-size: 0.8rem;
+  color: rgb(78, 78, 78);
+}
+
+/* 카드 섹션 반응형 구현 */
+@media (max-width: 1500px) {
+  .card {
+    width: 23%;
+  }
+  .card .content {
+    font-size: 1rem;
+  }
+  .card .cardTitle {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 1300px) {
+  .card {
+    width: 30%;
+  }
+  .card .content {
+    font-size: 1.1rem;
+  }
+  .card .cardTitle {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  /* .cardWrapper {
+    height: 900px;
+  } */
+  .card {
+    width: 48%;
+  }
+  .card .content {
+    font-size: 1.3rem;
+  }
+
+  .card .cardTitle {
+    font-size: 1.8rem;
+  }
+}
+
+/* 사진첩(가로 스크롤 뷰) */
+#gallery {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.pictureWrapper {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  max-width: 1400px;
+}
+
+.carousel {
+  display: flex;
+  animation: scroll-event 20s linear infinite;
+  width: max-content;
+  gap: 20px;
+}
+
+@keyframes scroll-event {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.carousel:hover {
+  animation-play-state: paused;
+}
+
+.carousel img {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  white-space: nowrap;
+}
+
+.carousel img:hover {
+  transform: scale(1.03);
+  transition: all 0.3s ease-in-out;
+}
+
+/* 푸터 */
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  padding: 20px 0 20px 0;
+  background-color: rgb(255, 255, 255);
+}
+
+footer > p {
+  padding-bottom: 10px;
+}
+
+footer > a {
+  color: black;
+  text-decoration: none;
+  font-style: italic;
+}
+
+footer > p {
+  font-size: 0.7rem;
+  color: gray;
+  font-style: italic;
+}
