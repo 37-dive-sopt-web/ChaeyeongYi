@@ -1,8 +1,8 @@
 import { memberMockData } from "./memberMockData.js";
 const STORAGE_KEY = "members";
 const MEMEBER_ID_KEY = "memberId";
-// 요소 선택
-const memberList = document.querySelector(".member-list tbody");
+
+const memberTable = document.querySelector(".member-list tbody");
 
 const nameInput = document.querySelector(".name-input");
 const engNameInput = document.querySelector(".eng-name-input");
@@ -17,7 +17,6 @@ const checkAllBtn = document.querySelector(".check-all");
 const deleteBtn = document.querySelector(".delete-btn");
 const openAddModalBtn = document.querySelector(".open-modal-btn");
 
-// 모달 요소
 const modal = document.querySelector(".modal");
 const modalNameInput = document.querySelector(".modal-name-input");
 const modalEngNameInput = document.querySelector(".modal-eng-name-input");
@@ -29,13 +28,10 @@ const modalAgeInput = document.querySelector(".modal-age-input");
 const modalCloseBtn = document.querySelector(".close-btn");
 const addRowBtn = document.querySelector(".add-row-btn");
 const modalBackdrop = document.querySelector(".modal");
-// localStorage 데이터 get
-let members = JSON.parse(localStorage.getItem(STORAGE_KEY));
-let newId = localStorage.getItem(MEMEBER_ID_KEY);
-// let isModalOpen =
-// TODO: table 데이터 업데이트
-const updateTable = (data = members) => {
-  memberList.innerHTML = "";
+
+// updateTable: 테이블 업데이트
+const updateTable = (data) => {
+  memberTable.innerHTML = "";
 
   data.forEach((member) => {
     const tr = document.createElement("tr");
@@ -53,18 +49,25 @@ const updateTable = (data = members) => {
     <td>${member.codeReviewGroup}</td>
     <td>${member.age}</td>
   `;
-    memberList.appendChild(tr);
+    memberTable.appendChild(tr);
   });
 };
 
-// 0. 초기화
-if (!members || members.length === 0) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(memberMockData));
-  members = [...memberMockData];
-  localStorage.setItem(MEMEBER_ID_KEY, members.length + 1);
-  newId = members.length + 1;
-}
-updateTable();
+// 0. localStorage 데이터 초기화
+const initializeTable = () => {
+  let memberList = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if (!memberList || memberList.length === 0) {
+    memberList = [...memberMockData];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(memberList));
+    localStorage.setItem(MEMEBER_ID_KEY, memberList.length + 1);
+    newId = memberList.length + 1;
+  }
+  updateTable(memberList);
+  return memberList;
+};
+
+let newId = localStorage.getItem(MEMEBER_ID_KEY);
+let members = initializeTable();
 
 // resetFilter: 검색 필터 input 초기화 함수
 const resetFilter = () => {
@@ -136,6 +139,7 @@ const deleteRow = () => {
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(deletedData));
   updateTable(deletedData);
+  checkAllBtn.checked = false;
   return;
 };
 deleteBtn.addEventListener("click", deleteRow);
@@ -161,6 +165,7 @@ const closeModal = () => {
   modal.classList.remove("open");
 };
 modalCloseBtn.addEventListener("click", closeModal);
+
 // addRow: 데이터 추가
 const addRow = () => {
   const newData = {
@@ -176,16 +181,34 @@ const addRow = () => {
 
   if (Object.values(newData).includes("")) {
     alert("값을 모두 입력해주세요!");
-    console.log("newData:", newData);
-  } else {
-    console.log("newData:", newData);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...members, newData]));
-    localStorage.setItem(MEMEBER_ID_KEY, ++newId);
-    updateTable(members);
-    closeModal();
+    return;
   }
+
+  members.push(newData);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(members));
+  localStorage.setItem(MEMEBER_ID_KEY, ++newId);
+  updateTable(members);
+  closeModal();
+  // resetInput
+  modalNameInput.value = "";
+  modalEngNameInput.value = "";
+  modalGithubInput.value = "";
+  modalGenderSelect.selectedIndex = 0;
+  modalRoleSelect.selectedIndex = 0;
+  modalGeumjandiInput.value = "";
+  modalAgeInput.value = "";
 };
 addRowBtn.addEventListener("click", addRow);
+
+// resetInput = () => {
+//   modalNameInput.value = "";
+//   modalEngNameInput.value = "";
+//   modalGithubInput.value = "";
+//   modalGenderSelect.selectedIndex = 0;
+//   modalRoleSelect.selectedIndex = 0;
+//   modalGeumjandiInput.value = "";
+//   modalAgeInput.value = "";
+// };
 
 // 모달 백드롭 클릭 시 close
 modalBackdrop.addEventListener("click", (event) => {
