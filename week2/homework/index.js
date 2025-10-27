@@ -56,7 +56,7 @@ const updateTable = (data) => {
 // 0. localStorage 데이터 초기화
 const initializeTable = () => {
   let memberList = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  if (!memberList || memberList.length === 0) {
+  if (!memberList) {
     memberList = [...memberMockData];
     localStorage.setItem(STORAGE_KEY, JSON.stringify(memberList));
     localStorage.setItem(MEMEBER_ID_KEY, memberList.length + 1);
