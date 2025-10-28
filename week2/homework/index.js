@@ -167,8 +167,7 @@ const updateAllcheckState = () => {
   const checkedCheckBoxes = document.querySelectorAll(
     "td > input[type=checkbox]:checked"
   );
-  checkAllBtn.checked =
-    allCheckBoxes.length === checkedCheckBoxes ? true : false;
+  checkAllBtn.checked = allCheckBoxes.length === checkedCheckBoxes.length;
 };
 
 // modal에 사용되는 함수들
@@ -176,10 +175,8 @@ const openModal = () => {
   modal.classList.add("open");
 };
 
-const closeModal = (event) => {
-  if (event.target === modalBackdrop || event.target === modalCloseBtn) {
-    modal.classList.remove("open");
-  }
+const closeModal = () => {
+  modal.classList.remove("open");
 };
 
 const addRow = () => {
@@ -228,4 +225,8 @@ memberTable.addEventListener("change", updateAllcheckState);
 modalCloseBtn.addEventListener("click", closeModal);
 addRowBtn.addEventListener("click", addRow);
 openAddModalBtn.addEventListener("click", openModal);
-modalBackdrop.addEventListener("click", closeModal);
+modalBackdrop.addEventListener("click", (event) => {
+  if (event.target === modalBackdrop) {
+    closeModal();
+  }
+});
