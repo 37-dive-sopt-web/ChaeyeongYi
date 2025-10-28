@@ -120,8 +120,8 @@ const implementFilter = () => {
         mem[key] !== undefined && mem[key] !== null
           ? String(mem[key]).toLowerCase()
           : "";
-      return target === filtered;
-      // return target.include(filtered);
+      // return target === filtered;
+      return target.includes(filtered);
     });
   };
 
@@ -166,11 +166,9 @@ const openModal = () => {
 };
 
 const closeModal = (event) => {
-  if (event && event.target !== modalBackdrop) {
-    return;
+  if (event.target === modalBackdrop || event.target === modalCloseBtn) {
+    modal.classList.remove("open");
   }
-
-  modal.classList.remove("open");
 };
 
 const addRow = () => {
