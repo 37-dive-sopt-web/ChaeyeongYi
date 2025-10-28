@@ -40,9 +40,14 @@ const updateTable = (data) => {
     <td>${member.name}</td>
     <td>${member.englishName}</td>
     <td>
-      <a id="github" href="https://github.com/${member.github}">${
-      member.github
-    }</a>
+      <a
+        id="github"
+        href="https://github.com/${member.github}"
+        target="_blank"
+        rel="noopenner noreferrer"
+      >
+        ${member.github}
+      </a>
     </td>
     <td>${member.gender === "female" ? "여성" : "남성"}</td>
     <td>${member.role}</td>
@@ -139,6 +144,7 @@ const deleteRow = () => {
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(deletedData));
   updateTable(deletedData);
+  members = deletedData;
   checkAllBtn.checked = false;
   return;
 };
@@ -153,6 +159,7 @@ const checkAllRow = () => {
     it.checked = checkAllBtn.checked;
   });
 };
+
 checkAllBtn.addEventListener("change", checkAllRow);
 
 // TODO: 모달 오픈 이벤트
@@ -169,27 +176,33 @@ modalCloseBtn.addEventListener("click", closeModal);
 // addRow: 데이터 추가
 const addRow = () => {
   const newData = {
-    id: newId,
+    id: Number(newId),
     name: modalNameInput.value.trim(),
     englishName: modalEngNameInput.value.trim(),
     github: modalGithubInput.value.trim(),
     gender: modalGenderSelect.value.trim(),
     role: modalRoleSelect.value.trim(),
-    codeReviewGroup: modalGeumjandiInput.value.trim(),
-    age: modalAgeInput.value.trim(),
+    codeReviewGroup: Number(modalGeumjandiInput.value),
+    age: Number(modalAgeInput.value),
   };
 
+  if (isNaN(newData.codeReviewGroup) || isNaN(newData.age)) {
+    alert("코드리뷰 조와 나이는 숫자만 입력해주세요!");
+    return;
+  }
   if (Object.values(newData).includes("")) {
     alert("값을 모두 입력해주세요!");
     return;
   }
-
+  console.log("members:", newData);
   members.push(newData);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(members));
   localStorage.setItem(MEMEBER_ID_KEY, ++newId);
+
   updateTable(members);
   closeModal();
-  // resetInput
+
+  // input 컴포넌트 리셋
   modalNameInput.value = "";
   modalEngNameInput.value = "";
   modalGithubInput.value = "";
@@ -199,16 +212,6 @@ const addRow = () => {
   modalAgeInput.value = "";
 };
 addRowBtn.addEventListener("click", addRow);
-
-// resetInput = () => {
-//   modalNameInput.value = "";
-//   modalEngNameInput.value = "";
-//   modalGithubInput.value = "";
-//   modalGenderSelect.selectedIndex = 0;
-//   modalRoleSelect.selectedIndex = 0;
-//   modalGeumjandiInput.value = "";
-//   modalAgeInput.value = "";
-// };
 
 // 모달 백드롭 클릭 시 close
 modalBackdrop.addEventListener("click", (event) => {
