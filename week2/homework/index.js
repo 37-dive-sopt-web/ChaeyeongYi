@@ -113,6 +113,7 @@ const implementFilter = () => {
           ? String(mem[key]).toLowerCase()
           : "";
       return target === filtered;
+      // return target.include(filtered);
     });
   };
 
@@ -120,7 +121,6 @@ const implementFilter = () => {
     return finalFilter(member, filtersWithoutBlank);
   });
 
-  console.log("filter:", filteredData);
   // 4. 업데이트
   updateTable(filteredData);
   return;
