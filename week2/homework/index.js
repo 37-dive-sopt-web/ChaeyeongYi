@@ -2,7 +2,7 @@ import { memberMockData } from "./memberMockData.js";
 const STORAGE_KEY = "members";
 const MEMEBER_ID_KEY = "memberId";
 
-const memberTable = document.querySelector(".member-list tbody");
+const memberTable = document.querySelector("tbody");
 
 const nameInput = document.querySelector(".name-input");
 const engNameInput = document.querySelector(".eng-name-input");
@@ -115,13 +115,15 @@ const implementFilter = () => {
   // 3. 필터링 적용
   const finalFilter = (mem, filter) => {
     return Object.keys(filter).every((key) => {
-      const filtered = String(filter[key]);
-      const target =
+      const filteredValue = String(filter[key]);
+      const targetValue =
         mem[key] !== undefined && mem[key] !== null
           ? String(mem[key]).toLowerCase()
           : "";
-      // return target === filtered;
-      return target.includes(filtered);
+      if (key === "gender") {
+        return targetValue === filteredValue;
+      }
+      return targetValue.includes(filteredValue);
     });
   };
 
@@ -158,6 +160,15 @@ const checkAllRow = () => {
   allCheckedBoxes.forEach((it) => {
     it.checked = checkAllBtn.checked;
   });
+};
+
+const updateAllcheckState = () => {
+  const allCheckBoxes = document.querySelectorAll("td > input[type=checkbox]");
+  const checkedCheckBoxes = document.querySelectorAll(
+    "td > input[type=checkbox]:checked"
+  );
+  checkAllBtn.checked =
+    allCheckBoxes.length === checkedCheckBoxes ? true : false;
 };
 
 // modal에 사용되는 함수들
@@ -213,6 +224,7 @@ implementBtn.addEventListener("click", implementFilter);
 resetBtn.addEventListener("click", resetFilter);
 deleteBtn.addEventListener("click", deleteRow);
 checkAllBtn.addEventListener("change", checkAllRow);
+memberTable.addEventListener("change", updateAllcheckState);
 modalCloseBtn.addEventListener("click", closeModal);
 addRowBtn.addEventListener("click", addRow);
 openAddModalBtn.addEventListener("click", openModal);

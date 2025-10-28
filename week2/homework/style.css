@@ -136,6 +136,10 @@ header :nth-child(3) {
     background-color: rgb(211, 211, 211);
     padding: 10px 0;
   }
+  
+  tr:hover {
+    background-color: #f1f1f1a2;
+  }
 
   td {
     text-align: center;
