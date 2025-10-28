@@ -46,6 +46,14 @@ function initializeTable() {
 
 function updateTable(data) {
   memberTable.innerHTML = "";
+  if (data.length === 0) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td colspan="8">조건에 맞는 데이터가 없어요.</td>
+    `;
+    memberTable.appendChild(tr);
+    return;
+  }
 
   data.forEach((member) => {
     const tr = document.createElement("tr");
