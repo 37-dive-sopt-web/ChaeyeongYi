@@ -128,6 +128,42 @@ header :nth-child(3) {
   }
 }
 
+@media (max-width: 690px) {
+  .filter-wrapper {
+    height: 400px;
+    grid-template-rows: 1fr 1fr 3fr 2fr 1fr;
+
+    > * {
+      display: grid;
+      align-items: center;
+    }
+
+    > div {
+      &:nth-child(-n + 2) {
+        grid-template-columns: 80px 1fr;
+      }
+
+      &:nth-child(3) {
+        grid-template-rows: 3;
+        grid-template-columns: 80px 1fr;
+      }
+
+      &:nth-child(4) {
+        grid-template-rows: 2;
+        grid-template-columns: 80px 1fr;
+      }
+    }
+
+    p {
+      font-weight: bold;
+    }
+
+    .left-space {
+      margin-left: 15px;
+    }
+  }
+}
+
 /* 리스트 */
 .title-wrapper {
   display: flex;
