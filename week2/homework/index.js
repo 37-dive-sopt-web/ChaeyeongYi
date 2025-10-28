@@ -29,8 +29,22 @@ const modalCloseBtn = document.querySelector(".close-btn");
 const addRowBtn = document.querySelector(".add-row-btn");
 const modalBackdrop = document.querySelector(".modal");
 
-// updateTable: 테이블 업데이트
-const updateTable = (data) => {
+let newId = localStorage.getItem(MEMEBER_ID_KEY);
+let members = initializeTable();
+
+function initializeTable() {
+  let memberList = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if (!memberList) {
+    memberList = [...memberMockData];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(memberList));
+    localStorage.setItem(MEMEBER_ID_KEY, memberList.length + 1);
+    newId = memberList.length + 1;
+  }
+  updateTable(memberList);
+  return memberList;
+}
+
+function updateTable(data) {
   memberTable.innerHTML = "";
 
   data.forEach((member) => {
@@ -56,25 +70,8 @@ const updateTable = (data) => {
   `;
     memberTable.appendChild(tr);
   });
-};
+}
 
-// 0. localStorage 데이터 초기화
-const initializeTable = () => {
-  let memberList = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  if (!memberList) {
-    memberList = [...memberMockData];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(memberList));
-    localStorage.setItem(MEMEBER_ID_KEY, memberList.length + 1);
-    newId = memberList.length + 1;
-  }
-  updateTable(memberList);
-  return memberList;
-};
-
-let newId = localStorage.getItem(MEMEBER_ID_KEY);
-let members = initializeTable();
-
-// resetFilter: 검색 필터 input 초기화 함수
 const resetFilter = () => {
   nameInput.value = "";
   engNameInput.value = "";
@@ -85,9 +82,7 @@ const resetFilter = () => {
   roleSelect.selectedIndex = 0;
   return;
 };
-resetBtn.addEventListener("click", resetFilter);
 
-// implementFilter: 검색 필터 적용 함수
 const implementFilter = () => {
   // 1. 필터 값 가져오기
   const filters = {
@@ -102,36 +97,35 @@ const implementFilter = () => {
   };
 
   // 2. 공백이 아닌 항목만 따로 저장
-  const finalFilter = {};
+  const filtersWithoutBlank = {};
   for (const key in filters) {
     if (filters[key] !== "") {
-      finalFilter[key] = filters[key].toLowerCase();
+      filtersWithoutBlank[key] = filters[key].toLowerCase();
     }
   }
 
   // 3. 필터링 적용
-  const applyFiltering = (mem, filter) => {
+  const finalFilter = (mem, filter) => {
     return Object.keys(filter).every((key) => {
       const filtered = String(filter[key]);
       const target =
         mem[key] !== undefined && mem[key] !== null
           ? String(mem[key]).toLowerCase()
           : "";
-      return target.includes(filtered);
+      return target === filtered;
     });
   };
 
   const filteredData = members.filter((member) => {
-    return applyFiltering(member, finalFilter);
+    return finalFilter(member, filtersWithoutBlank);
   });
 
+  console.log("filter:", filteredData);
   // 4. 업데이트
   updateTable(filteredData);
   return;
 };
-implementBtn.addEventListener("click", implementFilter);
 
-// deleteRow: 체크 박스 선택 삭제
 const deleteRow = () => {
   const checkedBoxes = document.querySelectorAll(
     "td > input[type=checkbox]:checked"
@@ -148,9 +142,7 @@ const deleteRow = () => {
   checkAllBtn.checked = false;
   return;
 };
-deleteBtn.addEventListener("click", deleteRow);
 
-// checkAllRow: 체크 박스 전체 선택
 const checkAllRow = () => {
   const allCheckedBoxes = document.querySelectorAll(
     "td > input[type=checkbox]"
@@ -160,20 +152,19 @@ const checkAllRow = () => {
   });
 };
 
-checkAllBtn.addEventListener("change", checkAllRow);
-
-// TODO: 모달 오픈 이벤트
-openAddModalBtn.addEventListener("click", () => {
+// modal에 사용되는 함수들
+const openModal = () => {
   modal.classList.add("open");
-});
+};
 
-// TODO: 모달 닫기 이벤트
-const closeModal = () => {
+const closeModal = (event) => {
+  if (event && event.target !== modalBackdrop) {
+    return;
+  }
+
   modal.classList.remove("open");
 };
-modalCloseBtn.addEventListener("click", closeModal);
 
-// addRow: 데이터 추가
 const addRow = () => {
   const newData = {
     id: Number(newId),
@@ -194,7 +185,6 @@ const addRow = () => {
     alert("값을 모두 입력해주세요!");
     return;
   }
-  console.log("members:", newData);
   members.push(newData);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(members));
   localStorage.setItem(MEMEBER_ID_KEY, ++newId);
@@ -211,11 +201,13 @@ const addRow = () => {
   modalGeumjandiInput.value = "";
   modalAgeInput.value = "";
 };
-addRowBtn.addEventListener("click", addRow);
 
-// 모달 백드롭 클릭 시 close
-modalBackdrop.addEventListener("click", (event) => {
-  if (event.target === modalBackdrop) {
-    closeModal();
-  }
-});
+// 이벤트 리스너 함수 연결
+implementBtn.addEventListener("click", implementFilter);
+resetBtn.addEventListener("click", resetFilter);
+deleteBtn.addEventListener("click", deleteRow);
+checkAllBtn.addEventListener("change", checkAllRow);
+modalCloseBtn.addEventListener("click", closeModal);
+addRowBtn.addEventListener("click", addRow);
+openAddModalBtn.addEventListener("click", openModal);
+modalBackdrop.addEventListener("click", closeModal);
