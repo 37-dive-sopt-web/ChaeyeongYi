@@ -32,6 +32,7 @@ const modalBackdrop = document.querySelector(".modal");
 let newId = localStorage.getItem(MEMEBER_ID_KEY);
 let members = initializeTable();
 
+// 테이블 초기화
 function initializeTable() {
   let memberList = JSON.parse(localStorage.getItem(STORAGE_KEY));
   if (!memberList) {
@@ -44,6 +45,7 @@ function initializeTable() {
   return memberList;
 }
 
+// 테이블 업데이트
 function updateTable(data) {
   memberTable.innerHTML = "";
   if (data.length === 0) {
@@ -80,6 +82,7 @@ function updateTable(data) {
   });
 }
 
+// 검색 필터 초기화
 const resetFilter = () => {
   nameInput.value = "";
   engNameInput.value = "";
@@ -91,6 +94,7 @@ const resetFilter = () => {
   return;
 };
 
+// 필터 적용
 const implementFilter = () => {
   // 1. 필터 값 가져오기
   const filters = {
@@ -136,6 +140,7 @@ const implementFilter = () => {
   return;
 };
 
+// 선택한 row 삭제
 const deleteRow = () => {
   const checkedBoxes = document.querySelectorAll(
     "td > input[type=checkbox]:checked"
@@ -153,6 +158,7 @@ const deleteRow = () => {
   return;
 };
 
+// 모든 row 선택
 const checkAllRow = () => {
   const allCheckedBoxes = document.querySelectorAll(
     "td > input[type=checkbox]"
@@ -162,6 +168,7 @@ const checkAllRow = () => {
   });
 };
 
+// checkAllBtn 상태 업데이트
 const updateAllcheckState = () => {
   const allCheckBoxes = document.querySelectorAll("td > input[type=checkbox]");
   const checkedCheckBoxes = document.querySelectorAll(
@@ -170,7 +177,7 @@ const updateAllcheckState = () => {
   checkAllBtn.checked = allCheckBoxes.length === checkedCheckBoxes.length;
 };
 
-// modal에 사용되는 함수들
+// 모달 이벤트
 const openModal = () => {
   modal.classList.add("open");
 };
@@ -179,6 +186,7 @@ const closeModal = () => {
   modal.classList.remove("open");
 };
 
+// row 추가
 const addRow = () => {
   const newData = {
     id: Number(newId),
@@ -215,6 +223,7 @@ const addRow = () => {
   modalGeumjandiInput.value = "";
   modalAgeInput.value = "";
 };
+
 
 // 이벤트 리스너 함수 연결
 implementBtn.addEventListener("click", implementFilter);
