@@ -1,0 +1,221 @@
+/* header */
+header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 70px;
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 10px;
+}
+
+header > * {
+  width: 33%;
+  text-align: center;
+}
+
+header :nth-child(1) {
+  font-size: 1.2rem;
+}
+
+header :nth-child(3) {
+  font-size: 0.7rem;
+}
+
+.section-container {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 10px;
+  gap: 10px;
+}
+
+/* 검색 필터 */
+.filter-wrapper {
+  display: grid;
+  height: 250px;
+  grid-template-rows: repeat(5, 1fr);
+
+  > * {
+    display: grid;
+    align-items: center;
+  }
+
+  > div {
+    &:nth-child(-n + 2) {
+      grid-template-columns: 100px 1fr;
+    }
+
+    &:nth-child(3) {
+      grid-template-columns: repeat(3, 100px 1fr);
+    }
+
+    &:nth-child(4) {
+      grid-template-columns: repeat(2, 100px 1fr);
+    }
+
+    &:nth-child(5) {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+  }
+
+  p {
+    font-weight: bold;
+  }
+
+  .left-space {
+    margin-left: 15px;
+  }
+}
+
+/* 반응형: 검색필터 너비 조정 */
+@media (max-width: 690px) {
+  h2 {
+    font-size: 18px;
+  }
+
+  .filter-wrapper {
+    height: 400px;
+    grid-template-rows: 1fr 1fr 3fr 2fr 1fr;
+
+    > * {
+      display: grid;
+      align-items: center;
+    }
+
+    > div {
+      &:nth-child(-n + 2) {
+        grid-template-columns: 80px 1fr;
+      }
+
+      &:nth-child(3) {
+        grid-template-rows: 3;
+        grid-template-columns: 80px 1fr;
+      }
+
+      &:nth-child(4) {
+        grid-template-rows: 2;
+        grid-template-columns: 80px 1fr;
+      }
+    }
+
+    p {
+      font-weight: bold;
+    }
+
+    .left-space {
+      margin-left: 15px;
+    }
+  }
+}
+
+/* 리스트 */
+.title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-wrapper {
+  > button {
+    padding: 8px 15px;
+  }
+}
+
+.member-list {
+  th {
+    background-color: rgb(211, 211, 211);
+    padding: 10px 0;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1a2;
+  }
+
+  td {
+    text-align: center;
+    padding: 7px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  a {
+    color: pink;
+  }
+}
+
+/* 멤버 추가 모달 */
+.modal {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 3;
+}
+
+.modal.open {
+  display: block;
+}
+
+.modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  padding: 18px 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.top-div {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+
+  .close-btn {
+    font-size: 1rem;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    margin-top: 4px;
+  }
+}
+
+.content-wrapper {
+  > * {
+    width: 100%;
+  }
+
+  input,
+  select {
+    margin-bottom: 10px;
+  }
+
+  .add-row-btn {
+    height: 35px;
+  }
+}
+
+.two-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+
+  * {
+    width: 100%;
+  }
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="common.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>🛸2주차 과제</title>
+  </head>
+  <body>
+    <header>
+      <p>🍅</p>
+      <h2>DIVE SOPT 웹계인</h2>
+      <p>🥦SOPT 37th WEB 이채영🥦</p>
+    </header>
+    <main>
+      <section class="section-container">
+        <h3>검색 필터</h3>
+        <div class="filter-wrapper">
+          <div>
+            <p>이름</p>
+            <input class="name-input" placeholder="이름을 입력하세요" />
+          </div>
+          <div>
+            <p>영문 이름</p>
+            <input
+              class="eng-name-input"
+              placeholder="영문 이름을 입력하세요"
+            />
+          </div>
+          <div>
+            <p>깃허브</p>
+            <input
+              class="github-input"
+              placeholder="깃허브 아이디를 입력하세요"
+            />
+            <p class="left-space">성별</p>
+            <select class="gender-select">
+              <option value="entire">전체</option>
+              <option value="female">여성</option>
+              <option value="male">남성</option>
+            </select>
+            <p class="left-space">역할</p>
+            <select class="role-select">
+              <option value="entire">전체</option>
+              <option>YB</option>
+              <option>OB</option>
+            </select>
+          </div>
+          <div>
+            <p>금잔디조</p>
+            <input
+              type="text"
+              class="geumjandi-input"
+              placeholder="금잔디조를 입력하세요 (1~9)"
+            />
+            <p class="left-space">나이</p>
+            <input
+              type="text"
+              class="age-input"
+              placeholder="나이를 입력하세요"
+            />
+          </div>
+          <div>
+            <button class="implement-btn" type="submit">적용</button>
+            <button class="reset-btn" type="reset">초기화</button>
+          </div>
+        </div>
+      </section>
+      <section class="section-container">
+        <div class="title-wrapper">
+          <h3>37기 웹 파트 목록</h3>
+          <div class="button-wrapper">
+            <button class="delete-btn" type="submit">선택 삭제</button>
+            <button class="open-modal-btn" type="button">추가</button>
+          </div>
+        </div>
+        <table class="member-list">
+          <thead>
+            <th><input type="checkbox" class="check-all" /></th>
+            <th>이름</th>
+            <th>영문 이름</th>
+            <th>깃허브</th>
+            <th>성별</th>
+            <th>역할</th>
+            <th>금잔디조</th>
+            <th>나이</th>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
+
+    <!-- 멤버 추가 모달 -->
+    <aside class="modal">
+      <div class="modal-wrapper">
+        <div class="top-div">
+          <h3>멤버 추가</h3>
+          <button type="button" class="close-btn">X</button>
+        </div>
+        <div class="content-wrapper">
+          <p>이름</p>
+          <input
+            type="text"
+            class="modal-name-input"
+            placeholder="이름을 입력하세요"
+          />
+          <p>영문 이름</p>
+          <input
+            type="text"
+            class="modal-eng-name-input"
+            placeholder="영문 이름을 입력하세요"
+          />
+          <p>깃허브</p>
+          <input
+            type="text"
+            class="modal-github-input"
+            placeholder="깃허브 아이디를 입력하세요"
+          />
+          <div class="two-content-wrapper">
+            <div>
+              <p>성별</p>
+              <select class="modal-gender-select">
+                <option value="">선택</option>
+                <option value="female">여성</option>
+                <option value="male">남성</option>
+              </select>
+            </div>
+            <div>
+              <p>역할</p>
+              <select class="modal-role-select">
+                <option value="">선택</option>
+                <option>YB</option>
+                <option>OB</option>
+              </select>
+            </div>
+          </div>
+          <div class="two-content-wrapper">
+            <div>
+              <p>금잔디조</p>
+              <input
+                class="modal-geumjandi-input"
+                placeholder="금잔디조를 입력하세요 (1~9)"
+              />
+            </div>
+            <div>
+              <p>나이</p>
+              <input class="modal-age-input" placeholder="나이를 입력하세요" />
+            </div>
+          </div>
+          <button class="add-row-btn" type="submit">추가</button>
+        </div>
+      </div>
+    </aside>
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
