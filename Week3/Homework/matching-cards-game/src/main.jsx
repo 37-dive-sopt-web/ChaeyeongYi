@@ -1,9 +1,12 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
+import { Global } from "@emotion/react";
+import { createRoot } from "react-dom/client";
+import { ResetStyles } from "./styles/reset.js";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+import App from "./App.jsx";
+
+createRoot(document.getElementById("root")).render(
+  <>
+    <Global styles={ResetStyles} />
     <App />
-  </StrictMode>,
-)
+  </>
+);
