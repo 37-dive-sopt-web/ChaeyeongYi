@@ -8,14 +8,13 @@ export const PageTabs = styled.div`
 
 export const PageButton = styled.button`
   height: 3rem;
-  background-color: ${({ active, theme }) =>
-    active ? theme.colors.mainBlue : theme.colors.blurBlue};
-  color: ${({ active, theme }) =>
-    active ? theme.colors.white : theme.colors.darkBlue};
+  background-color: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors.mainBlue : theme.colors.blurBlue};
+  color: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors.white : theme.colors.darkBlue};
   font-size: 1.6rem;
   font-weight: bold;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0 20px;
   border: none;
   border-radius: 50px;
 `;

@@ -7,14 +7,14 @@ const PageTabs = ({ activePage, onPageChange }) => {
   return (
     <S.PageTabs>
       <S.PageButton
-        active={activePage === "game"}
+        $isActive={activePage === "game"}
         type="button"
         onClick={() => handlePageChange("game")}
       >
         게임
       </S.PageButton>
       <S.PageButton
-        active={activePage === "ranking"}
+        $isActive={activePage === "ranking"}
         type="button"
         onClick={() => handlePageChange("ranking")}
       >

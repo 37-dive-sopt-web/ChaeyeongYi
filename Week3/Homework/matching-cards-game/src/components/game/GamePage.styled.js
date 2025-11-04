@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const GameCard = styled.section`
+export const GamePage = styled.section`
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -12,7 +12,7 @@ export const GameCard = styled.section`
   border-radius: 16px;
 `;
 
-export const MainSection = styled.div`
+export const GameSection = styled.div`
   height: 100%;
   width: 70%;
   border: 1px solid red;
@@ -35,4 +35,13 @@ export const TopDiv = styled.div`
     font-size: 2.5rem;
     font-weight: bold;
   }
+`;
+
+export const CardBoard = styled.div`
+  display: grid;
+  align-items: center;
+  justify-justify-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  height: 90%;
 `;
