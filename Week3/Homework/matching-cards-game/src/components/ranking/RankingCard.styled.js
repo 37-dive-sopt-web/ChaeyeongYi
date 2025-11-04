@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const GameCard = styled.section`
+export const RankCard = styled.section`
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -14,17 +14,11 @@ export const GameCard = styled.section`
 
 export const MainSection = styled.div`
   height: 100%;
-  width: 70%;
+  width: 100%;
   border: 1px solid red;
   color: ${({ theme }) => theme.colors.darkBlue};
 `;
 
-export const ControlSection = styled.div`
-  height: 100%;
-  width: 30%;
-  background-color: ${({ theme }) => theme.colors.mildBlue};
-  border-radius: 16px;
-`;
 
 export const TopDiv = styled.div`
   width: 100%;
