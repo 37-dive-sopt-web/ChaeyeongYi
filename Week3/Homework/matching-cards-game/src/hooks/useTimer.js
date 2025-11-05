@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-const useTimer = (goal = 45) => {
-  const [time, setTime] = useState(goal);
+const useTimer = (initialTime = 45) => {
+  const [time, setTime] = useState(initialTime);
   const [isActive, setIsActive] = useState(false);
 
   const handleTimerActive = () => {
@@ -21,8 +21,9 @@ const useTimer = (goal = 45) => {
     return () => clearInterval(timer);
   }, [time, isActive]);
 
-  const resetTimer = () => {
-    setTime(goal);
+  const resetTimer = (goalTime) => {
+    console.log("resetTimer called with goalTime:", goalTime);
+    setTime(goalTime);
     setIsActive(false);
   };
 

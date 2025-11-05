@@ -5,7 +5,6 @@ export const ResetStyles = css`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    scroll-behavior: smooth;
   }
 
   html {
@@ -28,5 +27,9 @@ export const ResetStyles = css`
     width: 100%;
     height: 100%;
     background-color: #e8f7ff;
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;

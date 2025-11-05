@@ -5,10 +5,10 @@ export const HistoryItem = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
-  font-size: 1.2rem;
+  width: 100%;
+  font-size: 1.5rem;
   font-weight: bold;
-  padding: 1rem 1rem;
+  padding: 1.4rem 1.2rem;
   background-color: ${({ theme }) => theme.colors.lightBlue};
   border-radius: 6px;
   color: ${({ theme }) => theme.colors.darkBlue};

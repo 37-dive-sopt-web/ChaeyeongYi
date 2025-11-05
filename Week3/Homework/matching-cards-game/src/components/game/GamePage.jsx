@@ -15,23 +15,13 @@ const GamePage = () => {
   const { level } = deckInfo;
   const [first, setFirst] = useState({});
   const [second, setSecond] = useState({});
-  const [history, setHistory] = useState([
-    [1, 4],
-    [2, 2],
-  ]);
+  const [history, setHistory] = useState([]);
   const [matchedList, setMatchedList] = useState([]);
   const { time, handleTimerActive, resetTimer } = useTimer();
 
-  const generateDeck = (level = deckInfo.level) => {
-    const data = buildDeck(level);
-    setDeckInfo({ status: "ready", data, level });
-    setFirst({});
-    setSecond({});
-    setHistory([
-      [1, 4],
-      [2, 2],
-    ]);
-    setMatchedList([]);
+  const generateDeck = (goalLevel = 1) => {
+    const data = buildDeck(goalLevel);
+    setDeckInfo({ status: "ready", data, level: goalLevel });
   };
 
   const handleClickCard = (card) => {
@@ -46,9 +36,25 @@ const GamePage = () => {
     }
   };
 
-  const handleResetGame = (level = 1) => {
-    generateDeck(level);
-    resetTimer();
+  const handleResetGame = (goalLevel) => {
+    generateDeck(goalLevel);
+    setFirst({});
+    setSecond({});
+    setHistory([]);
+    setMatchedList([]);
+    switch (goalLevel) {
+      case 1:
+        resetTimer(45);
+        break;
+      case 2:
+        resetTimer(60);
+        break;
+      case 3:
+        resetTimer(100);
+        break;
+      default:
+        resetTimer(45);
+    }
   };
 
   useEffect(() => {
@@ -56,7 +62,7 @@ const GamePage = () => {
 
     if (first.value === second.value) {
       const timer = setTimeout(() => {
-        setHistory((prev) => [...prev, first.value]);
+        setHistory((prev) => [...prev, [first.value, second.value]]);
         setMatchedList((prev) => [...prev, first.id, second.id]);
         console.log("history:", history);
         setFirst({});
@@ -66,6 +72,7 @@ const GamePage = () => {
       return () => clearTimeout(timer);
     } else {
       setTimeout(() => {
+        setHistory((prev) => [...prev, [first.value, second.value]]);
         setFirst({});
         setSecond({});
       }, FLIP_BACK_DELAY);
@@ -83,10 +90,12 @@ const GamePage = () => {
       <S.GameSection>
         <S.TopDiv>
           <p>게임 보드</p>
-          <button onClick={() => handleResetGame(1)}>게임 리셋</button>
+          <S.ResetButton onClick={() => handleResetGame(level)}>
+            게임 리셋
+          </S.ResetButton>
         </S.TopDiv>
         {deckInfo.status === "ready" && (
-          <S.CardBoard>
+          <S.CardBoard $level={level}>
             {deckInfo.data.map((card) => (
               <Card
                 key={card.id}
@@ -105,37 +114,44 @@ const GamePage = () => {
             <S.LevelButton
               key={item}
               $isActive={level === item}
-              onClick={() => generateDeck(item)}
+              onClick={() => handleResetGame(item)}
             >
               Level {item}
             </S.LevelButton>
           ))}
         </S.ButtonSection>
         {/* DashBoard */}
-        <div>
-          <div>
+        <S.Dashboard>
+          <S.DashBoardItem>
             <p>남은 시간</p>
-            <p>{time.toFixed(2)}</p>
-          </div>
-        </div>
-        <div>
-          <p>성공한 짝</p>
-          <p>{`${matchedList?.length / 2}/${deckInfo.data?.length / 2}`}</p>
-        </div>
-        <div>
-          <p>남은 짝</p>
-          <p>{(deckInfo.data?.length - matchedList?.length) / 2}</p>
-        </div>
+            <p className="status">{time.toFixed(2)}</p>
+          </S.DashBoardItem>
+          <S.DashBoardItem>
+            <p>성공한 짝</p>
+            <p className="status">{`${matchedList?.length / 2}/${
+              deckInfo.data?.length / 2
+            }`}</p>
+          </S.DashBoardItem>
+          <S.DashBoardItem>
+            <p>남은 짝</p>
+            <p className="status">
+              {(deckInfo.data?.length - matchedList?.length) / 2}
+            </p>
+          </S.DashBoardItem>
+        </S.Dashboard>
+
         {/* 안내 메시지 */}
         <S.SubTitle>안내 메시지</S.SubTitle>
-        <div>안내메시지가 들어갈 곳</div>
+        <S.MessageBox>카드를 눌러 게임을 시작</S.MessageBox>
         {/* 히스토리 */}
         <S.SubTitle>히스토리</S.SubTitle>
-        <div>
-          {history.map((item, idx) => (
-            <HistoryItem key={idx} history={item} />
-          ))}
-        </div>
+        <S.HisToryBox>
+          {history.length === 0 ? (
+            <S.EmptyState>아직 뒤집은 카드가 없어요</S.EmptyState>
+          ) : (
+            history.map((item, idx) => <HistoryItem key={idx} history={item} />)
+          )}
+        </S.HisToryBox>
       </S.ControlSection>
     </S.GamePage>
   );
