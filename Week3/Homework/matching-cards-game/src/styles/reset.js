@@ -14,6 +14,12 @@ export const ResetStyles = css`
     font-size: 62.5%;
   }
 
+  button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
   body {
     display: flex;
     flex-direction: column;

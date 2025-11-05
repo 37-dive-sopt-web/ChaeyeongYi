@@ -7,7 +7,9 @@ export const theme = {
     mildBlue: "#c4e5f7ff",
     blurBlue: "#e8f7ff",
     mildDarkBlue: "#5aa2c9ff",
+    hoverBlue: "#addaf4ff",
     red: "#f25c5c",
+    green: "#37c451",
     white: "#ffffff",
   },
 };
