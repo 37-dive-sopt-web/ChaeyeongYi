@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const RankCard = styled.section`
+export const RankPage = styled.section`
   display: flex;
   flex-direction: column;
   gap: 1rem;

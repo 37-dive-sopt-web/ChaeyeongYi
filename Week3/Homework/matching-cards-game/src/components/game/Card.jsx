@@ -8,7 +8,6 @@ const Card = ({ num, isFront, isMatched, onChangeFront }) => {
       onClick={() => {
         if (isMatched) return;
         onChangeFront();
-        console.log("Card clicked:", num);
       }}
     >
       <S.Back>?</S.Back>

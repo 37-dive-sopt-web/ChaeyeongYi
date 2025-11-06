@@ -3,9 +3,19 @@ import { useState, useEffect } from "react";
 const useTimer = (initialTime = 45) => {
   const [time, setTime] = useState(initialTime);
   const [isActive, setIsActive] = useState(false);
-
+  const [stopTime, setStopTime] = useState(null);
   const handleTimerActive = () => {
     setIsActive(true);
+  };
+
+  const resetTimer = (goalTime) => {
+    setTime(goalTime);
+    setIsActive(false);
+  };
+
+  const stopTimer = () => {
+    setIsActive(false);
+    setStopTime(time);
   };
 
   useEffect(() => {
@@ -21,13 +31,7 @@ const useTimer = (initialTime = 45) => {
     return () => clearInterval(timer);
   }, [time, isActive]);
 
-  const resetTimer = (goalTime) => {
-    console.log("resetTimer called with goalTime:", goalTime);
-    setTime(goalTime);
-    setIsActive(false);
-  };
-
-  return { time, handleTimerActive, resetTimer };
+  return { time, handleTimerActive, resetTimer, stopTimer, stopTime };
 };
 
 export default useTimer;

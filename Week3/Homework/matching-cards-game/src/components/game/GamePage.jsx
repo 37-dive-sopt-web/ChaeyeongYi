@@ -5,11 +5,13 @@ import useLocalstorage from "../../hooks/useLocalstorage";
 import buildDeck from "../../utils/buildDeck";
 import Card from "./Card";
 import HistoryItem from "./HistoryItem";
+import Modal from "./Modal";
 import {
   ROTATE_DURATION,
   FLIP_BACK_DELAY,
   LOCALSTORAGE_KEY,
   LEVEL_TIMER,
+  RESET_DELAY,
 } from "../../constants/constants";
 
 const GamePage = () => {
@@ -23,7 +25,10 @@ const GamePage = () => {
   const [second, setSecond] = useState({});
   const [history, setHistory] = useState([]);
   const [matchedList, setMatchedList] = useState([]);
-  const { time, handleTimerActive, resetTimer } = useTimer();
+  const [alertMessage, setAlertMessage] = useState("카드를 눌러 게임을 시작");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { time, handleTimerActive, resetTimer, stopTimer, stopTime } =
+    useTimer();
   const [record, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
 
   const generateDeck = (goalLevel = 1) => {
@@ -34,6 +39,7 @@ const GamePage = () => {
   const handleClickCard = (card) => {
     if (card.id === first.id || matchedList.includes(card.id)) return;
     handleTimerActive();
+    setAlertMessage("잠시만 기다려 주세요");
     if (!first.id) {
       setFirst(card);
       return;
@@ -45,14 +51,15 @@ const GamePage = () => {
 
   const handleResetGame = (goalLevel) => {
     generateDeck(goalLevel);
-    console.log("deckInfo:", deckInfo);
     setFirst({});
     setSecond({});
     setHistory([]);
     setMatchedList([]);
+    setAlertMessage("카드를 눌러 게임을 시작");
     resetTimer(LEVEL_TIMER[goalLevel]);
   };
 
+  // 두 장 클릭 시 매칭 검사
   useEffect(() => {
     if (!first.id || !second.id) return;
 
@@ -62,38 +69,49 @@ const GamePage = () => {
         setMatchedList((prev) => [...prev, first.id, second.id]);
         setFirst({});
         setSecond({});
+        setAlertMessage("성공!");
       }, ROTATE_DURATION);
 
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(timer);
+      };
     } else {
       setTimeout(() => {
         setHistory((prev) => [...prev, [first.value, second.value]]);
         setFirst({});
         setSecond({});
+        setAlertMessage("실패!");
       }, FLIP_BACK_DELAY);
       return;
     }
   }, [first, second]);
 
-  // 페이지 렌더링 시 덱 생성
+  // 초기화: 덱 생성
   useEffect(() => {
     generateDeck();
   }, []);
 
+  // 게임 종료 조건 충족 검사
   useEffect(() => {
     if (matchedList?.length === deckInfo.data?.length) {
-      alert("축하합니다! 모든 짝을 찾으셨습니다!");
+      stopTimer();
+      setIsModalOpen(true);
       const newRecord = {
         record_id: crypto.randomUUID(),
         level: deckInfo.level,
         recorded_at: new Date().toISOString(),
-        clear_time: Number((LEVEL_TIMER[deckInfo.level] - time).toFixed(3)),
+        clear_time: Number((LEVEL_TIMER[deckInfo.level] - time).toFixed(2)),
       };
       setRecord((prev) => [...prev, newRecord]);
-      handleResetGame(level);
     }
   }, [matchedList]);
 
+  // 타임 아웃
+  useEffect(() => {
+    if (time <= 0) {
+      setIsModalOpen(true);
+    }
+  }, [time]);
   return (
     <S.GamePage>
       <S.GameSection>
@@ -133,7 +151,7 @@ const GamePage = () => {
         <S.Dashboard>
           <S.DashBoardItem>
             <p>남은 시간</p>
-            <p className="status">{time.toFixed(2)}</p>
+            <p className="status">{time?.toFixed(2)}</p>
           </S.DashBoardItem>
           <S.DashBoardItem>
             <p>성공한 짝</p>
@@ -153,7 +171,7 @@ const GamePage = () => {
 
         {/* 안내 메시지 */}
         <S.SubTitle>안내 메시지</S.SubTitle>
-        <S.MessageBox>카드를 눌러 게임을 시작</S.MessageBox>
+        <S.MessageBox>{alertMessage}</S.MessageBox>
         {/* 히스토리 */}
         <S.SubTitle>히스토리</S.SubTitle>
         <S.HisToryBox>
@@ -164,6 +182,15 @@ const GamePage = () => {
           )}
         </S.HisToryBox>
       </S.ControlSection>
+      <Modal
+        open={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        level={level}
+        stopTime={Number((LEVEL_TIMER[deckInfo.level] - stopTime).toFixed(2))}
+        onAutoRestart={() => handleResetGame(level)}
+      />
     </S.GamePage>
   );
 };

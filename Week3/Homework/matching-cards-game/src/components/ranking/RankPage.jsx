@@ -1,14 +1,14 @@
-import * as S from "./RankingCard.styled";
+import * as S from "./RankPage.styled";
 import useLocalstorage from "../../hooks/useLocalstorage";
 import { LOCALSTORAGE_KEY } from "../../constants/constants";
 
-const RankCard = () => {
+const RankPage = () => {
   const [record, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
   const handleResetRecord = () => {
     setRecord([]);
   };
   return (
-    <S.RankCard>
+    <S.RankPage>
       <S.TopSection>
         <p>랭킹 보드</p>
         <S.ResetButton
@@ -52,8 +52,8 @@ const RankCard = () => {
           </tbody>
         </S.RecordTable>
       </S.MainSection>
-    </S.RankCard>
+    </S.RankPage>
   );
 };
 
-export default RankCard;
+export default RankPage;
