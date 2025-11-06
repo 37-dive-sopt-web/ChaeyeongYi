@@ -7,4 +7,3 @@ export const LEVEL_TIMER = {
   2: 60,
   3: 100,
 };
-// export const 

@@ -188,7 +188,7 @@ const GamePage = () => {
           setIsModalOpen(false);
         }}
         level={level}
-        stopTime={Number((LEVEL_TIMER[deckInfo.level] - stopTime).toFixed(2))}
+        stopTime={stopTime}
         onAutoRestart={() => handleResetGame(level)}
       />
     </S.GamePage>
