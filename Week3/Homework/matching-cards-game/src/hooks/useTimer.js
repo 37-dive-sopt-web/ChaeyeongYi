@@ -23,10 +23,10 @@ const useTimer = (initialTime = 45) => {
 
     const timer = setInterval(() => {
       setTime((prev) => {
-        const next = prev - 0.1;
+        const next = prev - 0.01;
         return Number(next.toFixed(2));
       });
-    }, 100);
+    }, 10);
 
     return () => clearInterval(timer);
   }, [time, isActive]);

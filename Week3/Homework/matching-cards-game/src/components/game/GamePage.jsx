@@ -2,7 +2,7 @@ import * as S from "./GamePage.styled";
 import { useEffect, useState } from "react";
 import useTimer from "../../hooks/useTimer";
 import useLocalstorage from "../../hooks/useLocalstorage";
-import buildDeck from "../../utils/buildDeck";
+import generateDeck from "../../utils/generateDeck";
 import Card from "./Card";
 import HistoryItem from "./HistoryItem";
 import Modal from "./Modal";
@@ -15,26 +15,17 @@ import {
 } from "../../constants/constants";
 
 const GamePage = () => {
-  const [deckInfo, setDeckInfo] = useState({
-    status: "idle",
-    data: null,
-    level: 1,
-  });
+  const [deckInfo, setDeckInfo] = useState(generateDeck());
   const { level } = deckInfo;
   const [first, setFirst] = useState({});
   const [second, setSecond] = useState({});
   const [history, setHistory] = useState([]);
   const [matchedList, setMatchedList] = useState([]);
   const [alertMessage, setAlertMessage] = useState("카드를 눌러 게임을 시작");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const { time, handleTimerActive, resetTimer, stopTimer, stopTime } =
     useTimer();
   const [record, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
-
-  const generateDeck = (goalLevel = 1) => {
-    const data = buildDeck(goalLevel);
-    setDeckInfo({ status: "ready", data, level: goalLevel });
-  };
 
   const handleClickCard = (card) => {
     if (card.id === first.id || matchedList.includes(card.id)) return;
@@ -50,7 +41,7 @@ const GamePage = () => {
   };
 
   const handleResetGame = (goalLevel) => {
-    generateDeck(goalLevel);
+    setDeckInfo(generateDeck(goalLevel));
     setFirst({});
     setSecond({});
     setHistory([]);
@@ -86,14 +77,9 @@ const GamePage = () => {
     }
   }, [first, second]);
 
-  // 초기화: 덱 생성
-  useEffect(() => {
-    generateDeck();
-  }, []);
-
   // 게임 종료 조건 충족 검사
   useEffect(() => {
-    if (matchedList?.length === deckInfo.data?.length) {
+    if (matchedList.length === deckInfo.data.length) {
       stopTimer();
       setIsModalOpen(true);
       const newRecord = {
@@ -151,12 +137,12 @@ const GamePage = () => {
         <S.Dashboard>
           <S.DashBoardItem>
             <p>남은 시간</p>
-            <p className="status">{time?.toFixed(2)}</p>
+            <p className="status">{time?.toFixed(1)}0</p>
           </S.DashBoardItem>
           <S.DashBoardItem>
             <p>성공한 짝</p>
-            <p className="status">{`${matchedList?.length / 2}/${
-              deckInfo.data?.length / 2
+            <p className="status">{`${matchedList.length / 2}/${
+              deckInfo.data.length / 2
             }`}</p>
           </S.DashBoardItem>
           <S.DashBoardItem>
