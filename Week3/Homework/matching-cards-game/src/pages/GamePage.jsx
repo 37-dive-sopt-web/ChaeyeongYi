@@ -7,6 +7,8 @@ import generateDeck from "../utils/generateDeck";
 import CardBoard from "../components/game/CardBoard";
 import HistoryItem from "../components/game/HistoryItem";
 import Modal from "../components/game/Modal";
+import LevelSelector from "../components/game/LevelSelector";
+
 import {
   ROTATE_DURATION,
   FLIP_BACK_DELAY,
@@ -118,17 +120,7 @@ const GamePage = () => {
         )}
       </S.GameSection>
       <S.ControlSection>
-        <S.ButtonSection>
-          {[1, 2, 3].map((item) => (
-            <S.LevelButton
-              key={item}
-              $isActive={level === item}
-              onClick={() => handleResetGame(item)}
-            >
-              Level {item}
-            </S.LevelButton>
-          ))}
-        </S.ButtonSection>
+        <LevelSelector level={level} onReset={handleResetGame} />
         <S.Dashboard>
           <S.DashBoardItem>
             <p>남은 시간</p>
