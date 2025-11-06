@@ -1,10 +1,16 @@
 import * as S from "./GamePage.styled";
 import { useEffect, useState } from "react";
 import useTimer from "../../hooks/useTimer";
+import useLocalstorage from "../../hooks/useLocalstorage";
 import buildDeck from "../../utils/buildDeck";
 import Card from "./Card";
 import HistoryItem from "./HistoryItem";
-import { ROTATE_DURATION, FLIP_BACK_DELAY } from "../../constants/constants";
+import {
+  ROTATE_DURATION,
+  FLIP_BACK_DELAY,
+  LOCALSTORAGE_KEY,
+  LEVEL_TIMER,
+} from "../../constants/constants";
 
 const GamePage = () => {
   const [deckInfo, setDeckInfo] = useState({
@@ -18,6 +24,7 @@ const GamePage = () => {
   const [history, setHistory] = useState([]);
   const [matchedList, setMatchedList] = useState([]);
   const { time, handleTimerActive, resetTimer } = useTimer();
+  const [record, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
 
   const generateDeck = (goalLevel = 1) => {
     const data = buildDeck(goalLevel);
@@ -42,19 +49,7 @@ const GamePage = () => {
     setSecond({});
     setHistory([]);
     setMatchedList([]);
-    switch (goalLevel) {
-      case 1:
-        resetTimer(45);
-        break;
-      case 2:
-        resetTimer(60);
-        break;
-      case 3:
-        resetTimer(100);
-        break;
-      default:
-        resetTimer(45);
-    }
+    resetTimer(LEVEL_TIMER[goalLevel]);
   };
 
   useEffect(() => {
@@ -64,7 +59,6 @@ const GamePage = () => {
       const timer = setTimeout(() => {
         setHistory((prev) => [...prev, [first.value, second.value]]);
         setMatchedList((prev) => [...prev, first.id, second.id]);
-        console.log("history:", history);
         setFirst({});
         setSecond({});
       }, ROTATE_DURATION);
@@ -84,6 +78,20 @@ const GamePage = () => {
   useEffect(() => {
     generateDeck();
   }, []);
+
+  useEffect(() => {
+    if (matchedList?.length === deckInfo.data?.length) {
+      alert("축하합니다! 모든 짝을 찾으셨습니다!");
+      const newRecord = {
+        record_id: crypto.randomUUID(),
+        level: deckInfo.level,
+        recorded_at: new Date().toISOString(),
+        clear_time: Number((LEVEL_TIMER[deckInfo.level] - time).toFixed(3)),
+      };
+      setRecord((prev) => [...prev, newRecord]);
+      handleResetGame(level);
+    }
+  }, [matchedList]);
 
   return (
     <S.GamePage>
@@ -135,7 +143,9 @@ const GamePage = () => {
           <S.DashBoardItem>
             <p>남은 짝</p>
             <p className="status">
-              {(deckInfo.data?.length - matchedList?.length) / 2}
+              {deckInfo.data
+                ? (deckInfo.data.length - matchedList.length) / 2
+                : 0}
             </p>
           </S.DashBoardItem>
         </S.Dashboard>
