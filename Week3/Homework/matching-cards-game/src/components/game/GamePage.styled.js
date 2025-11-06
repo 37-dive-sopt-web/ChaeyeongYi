@@ -8,14 +8,13 @@ export const GamePage = styled.section`
   height: 80vh;
   margin-top: 1.2rem;
   padding: 2rem;
-  background-color: ${({ theme }) => theme.colors.lightBlue};
+  background-color: ${({ theme }) => theme.colors.primary[200]};
   border-radius: 16px;
 `;
 
 export const GameSection = styled.div`
   height: 100%;
   width: 70%;
-  color: ${({ theme }) => theme.colors.darkBlue};
 `;
 
 export const TopDiv = styled.div`
@@ -34,11 +33,11 @@ export const ResetButton = styled.button`
   height: 3rem;
   padding: 0 1.3rem;
   border-radius: 50px;
-  background-color: ${({ theme }) => theme.colors.red};
+  background-color: ${({ theme }) => theme.colors.red[500]};
   font-size: 1.5rem;
   color: ${({ theme }) => theme.colors.white};
   &:hover {
-    background-color: ${({ theme }) => theme.colors.hoverRed};
+    background-color: ${({ theme }) => theme.colors.red[400]};
   }
 `;
 
@@ -71,7 +70,7 @@ export const ControlSection = styled.div`
   height: 100%;
   padding: 0 1rem;
   gap: 1.2rem;
-  background-color: ${({ theme }) => theme.colors.mildBlue};
+  background-color: ${({ theme }) => theme.colors.primary[300]};
   border-radius: 16px;
 `;
 
@@ -85,14 +84,14 @@ export const LevelButton = styled.button`
   height: 3rem;
   border-radius: 8px;
   background-color: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.mainBlue : theme.colors.lightBlue};
+    $isActive ? theme.colors.primary[500] : theme.colors.primary[200]};
   font-size: 1.5rem;
   font-weight: bold;
   color: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.white : theme.colors.mainBlue};
+    $isActive ? theme.colors.white : theme.colors.primary[500]};
   &:hover {
     background-color: ${({ $isActive, theme }) =>
-      $isActive ? theme.colors.mainBlue : theme.colors.hoverBlue};
+      $isActive ? theme.colors.primary[500] : theme.colors.primary[400]};
   }
 `;
 
@@ -102,7 +101,6 @@ export const SubTitle = styled.p`
   margin-top: 1rem;
   margin-left: 1rem;
   width: 100%;
-  color: ${({ theme }) => theme.colors.darkBlue};
 `;
 
 export const Dashboard = styled.div`
@@ -120,10 +118,9 @@ export const DashBoardItem = styled.div`
   justify-content: center;
   gap: 1rem;
   border-radius: 6px;
-  background-color: ${({ theme }) => theme.colors.lightBlue};
+  background-color: ${({ theme }) => theme.colors.primary[200]};
   font-size: 1.3rem;
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.darkBlue};
 
   .status {
     font-size: 2rem;
@@ -137,10 +134,9 @@ export const MessageBox = styled.div`
   width: 100%;
   padding: 3rem 0 3rem 1rem;
   border-radius: 6px;
-  background-color: ${({ theme }) => theme.colors.lightBlue};
+  background-color: ${({ theme }) => theme.colors.primary[200]};
   font-size: 1.6rem;
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.darkBlue};
 `;
 
 export const HisToryBox = styled.div`
@@ -159,6 +155,6 @@ export const EmptyState = styled.p`
   justify-content: center;
   font-size: 1.5rem;
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.darkBlue};
+
   height: 100%;
 `;

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-export const ResetStyles = css`
+export const ResetStyles = () => css`
   * {
     box-sizing: border-box;
     margin: 0;
@@ -27,7 +27,7 @@ export const ResetStyles = css`
     width: 100%;
     height: 100%;
     background-color: #e8f7ff;
-
+    color: #223a5cff;
     ::-webkit-scrollbar {
       display: none;
     }

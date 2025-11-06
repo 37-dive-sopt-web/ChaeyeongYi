@@ -20,13 +20,12 @@ export const Modal = styled.div`
   align-items: center;
   justify-content: center;
   transform: translate(-50%, -50%);
-  background-color: ${({ theme }) => theme.colors.lightBlue};
+  background-color: ${({ theme }) => theme.colors.primary[200]};
   border-radius: 16px;
   width: 30rem;
   height: 12rem;
   z-index: 2;
   gap: 1rem;
-  color: ${({ theme }) => theme.colors.darkBlue};
 `;
 
 export const Title = styled.h1`
@@ -41,5 +40,5 @@ export const DetailText = styled.p`
 export const TimeGuideText = styled.p`
   font-size: 1.5rem;
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.mildDarkBlue};
+  color: ${({ theme }) => theme.colors.primary[600]};
 `;

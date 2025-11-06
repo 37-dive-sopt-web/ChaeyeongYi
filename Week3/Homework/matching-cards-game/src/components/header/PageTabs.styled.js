@@ -9,9 +9,9 @@ export const PageTabs = styled.div`
 export const PageButton = styled.button`
   height: 3rem;
   background-color: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.mainBlue : theme.colors.blurBlue};
+    $isActive ? theme.colors.primary[500] : theme.colors.primary[100]};
   color: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.white : theme.colors.darkBlue};
+    $isActive ? theme.colors.white : theme.colors.primary[700]};
   font-size: 1.6rem;
   font-weight: bold;
   padding: 0 20px;

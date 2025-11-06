@@ -8,9 +8,8 @@ export const RankPage = styled.section`
   height: 80vh;
   margin-top: 1.2rem;
   padding: 2rem;
-  background-color: ${({ theme }) => theme.colors.lightBlue};
+  background-color: ${({ theme }) => theme.colors.primary[200]};
   border-radius: 16px;
-  color: ${({ theme }) => theme.colors.darkBlue};
 `;
 
 export const TopSection = styled.div`
@@ -28,11 +27,11 @@ export const ResetButton = styled.button`
   height: 3rem;
   padding: 0 1.3rem;
   border-radius: 50px;
-  background-color: ${({ theme }) => theme.colors.red};
+  background-color: ${({ theme }) => theme.colors.red[500]};
   font-size: 1.5rem;
   color: ${({ theme }) => theme.colors.white};
   &:hover {
-    background-color: ${({ theme }) => theme.colors.hoverRed};
+    background-color: ${({ theme }) => theme.colors.red[400]};
   }
 `;
 
@@ -47,7 +46,7 @@ export const RecordTable = styled.table`
   font-size: 1.5rem;
   text-align: left;
   th {
-    background-color: ${({ theme }) => theme.colors.mildDarkBlue};
+    background-color: ${({ theme }) => theme.colors.primary[600]};
     padding: 1rem;
   }
   td {

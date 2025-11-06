@@ -25,12 +25,12 @@ export const Front = styled.div`
   backface-visibility: hidden;
   border: 1px solid
     ${({ $isMatched, theme }) =>
-      $isMatched ? theme.colors.mildDarkBlue : theme.colors.mainBlue};
+      $isMatched ? theme.colors.primary[600] : theme.colors.primary[500]};
   border-radius: 10px;
   background-color: ${({ $isMatched, theme }) =>
-    $isMatched ? theme.colors.mildDarkBlue : theme.colors.lightBlue};
+    $isMatched ? theme.colors.primary[600] : theme.colors.primary[200]};
   color: ${({ $isMatched, theme }) =>
-    $isMatched ? theme.colors.white : theme.colors.mainBlue};
+    $isMatched ? theme.colors.white : theme.colors.primary[500]};
 `;
 
 export const Back = styled.div`
@@ -42,7 +42,7 @@ export const Back = styled.div`
   height: 100%;
   backface-visibility: hidden;
   border-radius: 10px;
-  background-color: ${({ theme }) => theme.colors.mainBlue};
+  background-color: ${({ theme }) => theme.colors.primary[500]};
   font-size: 3rem;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.white};

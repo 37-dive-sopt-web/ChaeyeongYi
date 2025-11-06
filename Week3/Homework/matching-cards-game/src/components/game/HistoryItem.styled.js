@@ -9,12 +9,11 @@ export const HistoryItem = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   padding: 1.4rem 1.2rem;
-  background-color: ${({ theme }) => theme.colors.lightBlue};
+  background-color: ${({ theme }) => theme.colors.primary[200]};
   border-radius: 6px;
-  color: ${({ theme }) => theme.colors.darkBlue};
 
   .numbers {
     color: ${({ $isSuccess, theme }) =>
-      $isSuccess ? theme.colors.green : theme.colors.red};
+      $isSuccess ? theme.colors.green : theme.colors.red[500]};
   }
 `;

@@ -22,7 +22,7 @@ const GamePage = () => {
   const [history, setHistory] = useState([]);
   const [matchedList, setMatchedList] = useState([]);
   const [alertMessage, setAlertMessage] = useState("카드를 눌러 게임을 시작");
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { time, handleTimerActive, resetTimer, stopTimer, stopTime } =
     useTimer();
   const [record, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
@@ -133,7 +133,6 @@ const GamePage = () => {
             </S.LevelButton>
           ))}
         </S.ButtonSection>
-        {/* DashBoard */}
         <S.Dashboard>
           <S.DashBoardItem>
             <p>남은 시간</p>
@@ -154,11 +153,8 @@ const GamePage = () => {
             </p>
           </S.DashBoardItem>
         </S.Dashboard>
-
-        {/* 안내 메시지 */}
         <S.SubTitle>안내 메시지</S.SubTitle>
         <S.MessageBox>{alertMessage}</S.MessageBox>
-        {/* 히스토리 */}
         <S.SubTitle>히스토리</S.SubTitle>
         <S.HisToryBox>
           {history.length === 0 ? (
