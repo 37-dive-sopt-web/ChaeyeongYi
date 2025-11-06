@@ -39,21 +39,3 @@ export const MainSection = styled.div`
   height: 100%;
   width: 100%;
 `;
-
-export const RecordTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 1.5rem;
-  text-align: left;
-  th {
-    background-color: ${({ theme }) => theme.colors.primary[600]};
-    padding: 1rem;
-  }
-  td {
-    padding: 1rem;
-  }
-
-  #no-record {
-    text-align: center;
-  }
-`;
