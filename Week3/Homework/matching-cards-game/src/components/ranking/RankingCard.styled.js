@@ -53,4 +53,8 @@ export const RecordTable = styled.table`
   td {
     padding: 1rem;
   }
+
+  #no-record {
+    text-align: center;
+  }
 `;

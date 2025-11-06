@@ -45,6 +45,7 @@ const GamePage = () => {
 
   const handleResetGame = (goalLevel) => {
     generateDeck(goalLevel);
+    console.log("deckInfo:", deckInfo);
     setFirst({});
     setSecond({});
     setHistory([]);

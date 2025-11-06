@@ -4,7 +4,6 @@ import { LOCALSTORAGE_KEY } from "../../constants/constants";
 
 const RankCard = () => {
   const [record, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
-  // console.log("record:", record);
   const handleResetRecord = () => {
     setRecord([]);
   };
@@ -32,10 +31,15 @@ const RankCard = () => {
           </thead>
           <tbody>
             {record.length === 0 ? (
-              <p>기록이 없습니다.</p>
+              <tr>
+                <td id="no-record" colSpan="4">
+                  기록이 없습니다.
+                </td>
+              </tr>
             ) : (
               record
                 .sort((a, b) => a.clear_time - b.clear_time)
+                .sort((a, b) => b.level - a.level)
                 .map((item, idx) => (
                   <tr key={item.record_id}>
                     <td>{idx + 1}</td>
