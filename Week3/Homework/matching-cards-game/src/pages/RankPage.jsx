@@ -1,7 +1,7 @@
 import * as S from "./RankPage.styled";
-import useLocalstorage from "../../hooks/useLocalstorage";
-import { LOCALSTORAGE_KEY } from "../../constants/constants";
-import RankTable from "./RankTable";
+import useLocalstorage from "../hooks/useLocalstorage";
+import { LOCALSTORAGE_KEY } from "../constants/constants";
+import RankTable from "../components/rank/RankTable";
 
 const RankPage = () => {
   const [record, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
@@ -12,11 +12,7 @@ const RankPage = () => {
     <S.RankPage>
       <S.TopSection>
         <p>랭킹 보드</p>
-        <S.ResetButton
-          onClick={() => {
-            handleResetRecord();
-          }}
-        >
+        <S.ResetButton onClick={() => handleResetRecord()}>
           기록 초기화
         </S.ResetButton>
       </S.TopSection>

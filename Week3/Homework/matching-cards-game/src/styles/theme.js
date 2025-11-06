@@ -5,7 +5,7 @@ export const theme = {
       200: "#d7effc",
       300: "#c4e5f7ff",
       400: "#addaf4ff",
-      500: "#78cdfbff",
+      500: "#8acafeff",
       600: "#5aa2c9ff",
       700: "#223a5cff",
     },

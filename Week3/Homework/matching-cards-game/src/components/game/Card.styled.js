@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
+import { ROTATE_DURATION } from "../../constants/constants.js";
 
 export const CardWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
   border-radius: 1rem;
-  transition: 0.4s;
+  transition: ${ROTATE_DURATION}ms;
   perspective: 1000px;
   transform-style: preserve-3d;
   cursor: ${({ $isMatched }) => ($isMatched ? "default" : "pointer")};

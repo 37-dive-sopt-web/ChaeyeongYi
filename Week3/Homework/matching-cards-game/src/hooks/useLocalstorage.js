@@ -15,14 +15,6 @@ const useLocalstorage = (key) => {
     }
   });
 
-  /* 
-  {
-    ranking_id: number,
-    level: number,
-    recorded_at: string,
-    clear_time: number,
-  }
-*/
   const setLocalstorage = (value) => {
     setLocalStorageData((prev) => {
       const newValue = typeof value === "function" ? value(prev) : value;

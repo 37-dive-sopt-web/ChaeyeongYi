@@ -1,8 +1,8 @@
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "./styles/theme";
-import Header from "./components/header/Header";
-import GamePage from "./components/game/GamePage";
-import RankPage from "./components/ranking/RankPage";
+import Header from "./components/common/Header";
+import GamePage from "./pages/GamePage";
+import RankPage from "./pages/RankPage";
 import { useState } from "react";
 
 function App() {

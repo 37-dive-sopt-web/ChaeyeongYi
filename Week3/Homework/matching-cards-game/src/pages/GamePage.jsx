@@ -1,18 +1,18 @@
 import * as S from "./GamePage.styled";
 import { useEffect, useState } from "react";
-import useTimer from "../../hooks/useTimer";
-import useLocalstorage from "../../hooks/useLocalstorage";
-import generateDeck from "../../utils/generateDeck";
-import Card from "./Card";
-import HistoryItem from "./HistoryItem";
-import Modal from "./Modal";
+import useTimer from "../hooks/useTimer";
+import useModal from "../hooks/useModal";
+import useLocalstorage from "../hooks/useLocalstorage";
+import generateDeck from "../utils/generateDeck";
+import CardBoard from "../components/game/CardBoard";
+import HistoryItem from "../components/game/HistoryItem";
+import Modal from "../components/game/Modal";
 import {
   ROTATE_DURATION,
   FLIP_BACK_DELAY,
   LOCALSTORAGE_KEY,
   LEVEL_TIMER,
-  RESET_DELAY,
-} from "../../constants/constants";
+} from "../constants/constants";
 
 const GamePage = () => {
   const [deckInfo, setDeckInfo] = useState(generateDeck());
@@ -22,10 +22,10 @@ const GamePage = () => {
   const [history, setHistory] = useState([]);
   const [matchedList, setMatchedList] = useState([]);
   const [alertMessage, setAlertMessage] = useState("카드를 눌러 게임을 시작");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isModalOpen, openModal, closeModal } = useModal();
   const { time, handleTimerActive, resetTimer, stopTimer, stopTime } =
     useTimer();
-  const [record, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
+  const [_, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
 
   const handleClickCard = (card) => {
     if (card.id === first.id || matchedList.includes(card.id)) return;
@@ -50,25 +50,24 @@ const GamePage = () => {
     resetTimer(LEVEL_TIMER[goalLevel]);
   };
 
-  // 두 장 클릭 시 매칭 검사
+  // 매칭 검사
   useEffect(() => {
     if (!first.id || !second.id) return;
-
+    // 매칭 시 history, matchedList 갱신
     if (first.value === second.value) {
-      const timer = setTimeout(() => {
-        setHistory((prev) => [...prev, [first.value, second.value]]);
+      // 회전 효과 딜레이를 주기 위해 타이머 추가
+      setTimeout(() => {
+        setHistory((prev) => [[first.value, second.value], ...prev]);
         setMatchedList((prev) => [...prev, first.id, second.id]);
         setFirst({});
         setSecond({});
         setAlertMessage("성공!");
       }, ROTATE_DURATION);
-
-      return () => {
-        clearTimeout(timer);
-      };
+      return;
     } else {
+      // 회전 효과 딜레이를 주기 위해 타이머 추가
       setTimeout(() => {
-        setHistory((prev) => [...prev, [first.value, second.value]]);
+        setHistory((prev) => [[first.value, second.value], ...prev]);
         setFirst({});
         setSecond({});
         setAlertMessage("실패!");
@@ -81,7 +80,7 @@ const GamePage = () => {
   useEffect(() => {
     if (matchedList.length === deckInfo.data.length) {
       stopTimer();
-      setIsModalOpen(true);
+      openModal();
       const newRecord = {
         record_id: crypto.randomUUID(),
         level: deckInfo.level,
@@ -95,7 +94,7 @@ const GamePage = () => {
   // 타임 아웃
   useEffect(() => {
     if (time <= 0) {
-      setIsModalOpen(true);
+      openModal();
     }
   }, [time]);
   return (
@@ -108,17 +107,14 @@ const GamePage = () => {
           </S.ResetButton>
         </S.TopDiv>
         {deckInfo.status === "ready" && (
-          <S.CardBoard $level={level}>
-            {deckInfo.data.map((card) => (
-              <Card
-                key={card.id}
-                num={card.value}
-                isMatched={matchedList.includes(card.id)}
-                isFront={first.id === card.id || second.id === card.id}
-                onChangeFront={() => handleClickCard(card)}
-              />
-            ))}
-          </S.CardBoard>
+          <CardBoard
+            level={level}
+            deckInfo={deckInfo}
+            matchedList={matchedList}
+            first={first}
+            second={second}
+            onChangeFront={handleClickCard}
+          />
         )}
       </S.GameSection>
       <S.ControlSection>
@@ -166,9 +162,7 @@ const GamePage = () => {
       </S.ControlSection>
       <Modal
         open={isModalOpen}
-        onClose={() => {
-          setIsModalOpen(false);
-        }}
+        onClose={() => closeModal()}
         level={level}
         stopTime={stopTime}
         onAutoRestart={() => handleResetGame(level)}
