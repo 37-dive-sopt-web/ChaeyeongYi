@@ -8,6 +8,7 @@ const CardBoard = ({
   first,
   second,
   onChangeFront,
+  onChangeAlert,
 }) => {
   return (
     <S.CardBoard $level={level}>
@@ -18,6 +19,7 @@ const CardBoard = ({
           isMatched={matchedList.includes(card.id)}
           isFront={first.id === card.id || second.id === card.id}
           onChangeFront={() => onChangeFront(card)}
+          onChangeAlert={onChangeAlert}
         />
       ))}
     </S.CardBoard>

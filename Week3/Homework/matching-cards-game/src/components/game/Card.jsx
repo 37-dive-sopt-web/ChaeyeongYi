@@ -1,12 +1,15 @@
 import * as S from "./Card.styled";
 
-const Card = ({ num, isFront, isMatched, onChangeFront }) => {
+const Card = ({ num, isFront, isMatched, onChangeFront, onChangeAlert }) => {
   return (
     <S.CardWrapper
       $isFront={isFront}
       $isMatched={isMatched}
       onClick={() => {
-        if (isMatched) return;
+        if (isMatched) {
+          onChangeAlert("이미 맞춘 카드입니다!");
+          return;
+        }
         onChangeFront();
       }}
     >

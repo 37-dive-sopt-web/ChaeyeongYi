@@ -126,6 +126,7 @@ const GamePage = () => {
             first={first}
             second={second}
             onChangeFront={handleClickCard}
+            onChangeAlert={setAlertMessage}
           />
         )}
       </S.GameSection>
