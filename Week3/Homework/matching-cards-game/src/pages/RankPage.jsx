@@ -5,6 +5,13 @@ import RankTable from "../components/rank/RankTable";
 
 const RankPage = () => {
   const [record, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
+
+  /**
+   * 기록을 초기화해요.
+   * 정말 초기화할 것인지 한 번 더 확인 후, 초기화해요.
+   *
+   * @returns {void}
+   */
   const handleResetRecord = () => {
     if (window.confirm("기록을 초기화하시겠습니까?")) {
       setRecord([]);

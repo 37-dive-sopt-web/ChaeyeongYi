@@ -4,6 +4,7 @@ import * as S from "./Modal.styled";
 
 const Modal = ({ open, onClose, level, stopTime, onAutoRestart }) => {
   const [countdown, setCountdown] = useState(3);
+
   useEffect(() => {
     if (!open) return;
     setCountdown(3);
@@ -22,7 +23,7 @@ const Modal = ({ open, onClose, level, stopTime, onAutoRestart }) => {
       clearInterval(interval);
       clearTimeout(timeout);
     };
-  }, [open, onClose, onAutoRestart]);
+  }, [open]);
 
   if (!open) return null;
 

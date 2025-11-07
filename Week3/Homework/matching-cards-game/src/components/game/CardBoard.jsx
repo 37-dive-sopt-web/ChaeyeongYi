@@ -5,8 +5,7 @@ const CardBoard = ({
   level,
   deckInfo,
   matchedList,
-  first,
-  second,
+  openCardIds,
   onChangeFront,
   onChangeAlert,
 }) => {
@@ -17,7 +16,7 @@ const CardBoard = ({
           key={card.id}
           num={card.value}
           isMatched={matchedList.includes(card.id)}
-          isFront={first.id === card.id || second.id === card.id}
+          isFront={openCardIds.includes(card.id)}
           onChangeFront={() => onChangeFront(card)}
           onChangeAlert={onChangeAlert}
         />

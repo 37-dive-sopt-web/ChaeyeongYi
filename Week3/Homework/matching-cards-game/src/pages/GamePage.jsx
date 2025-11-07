@@ -7,6 +7,7 @@ import generateDeck from "../utils/generateDeck";
 import CardBoard from "../components/game/CardBoard";
 import HistoryItem from "../components/game/HistoryItem";
 import Modal from "../components/game/Modal";
+import Dashboard from "../components/game/Dashboard";
 import LevelSelector from "../components/game/LevelSelector";
 
 import {
@@ -18,7 +19,6 @@ import {
 
 const GamePage = () => {
   const [deckInfo, setDeckInfo] = useState(generateDeck());
-  // const { level } = deckInfo;
   const [first, setFirst] = useState({});
   const [second, setSecond] = useState({});
   const [history, setHistory] = useState([]);
@@ -67,12 +67,13 @@ const GamePage = () => {
     resetTimer(LEVEL_TIMER[goalLevel]);
   };
 
-  // 매칭 검사
+  // 매칭 검사(조건: second가 변경될 때)
   useEffect(() => {
     if (!first.id || !second.id) return;
-    // 매칭 시 history, matchedList 갱신
+
+    // 매칭 성공
     if (first.value === second.value) {
-      // 회전 효과 딜레이를 주기 위해 타이머 추가
+      // 효과 duration 만큼 delay 추가
       setTimeout(() => {
         setHistory((prev) => [[first.value, second.value], ...prev]);
         setMatchedList((prev) => [...prev, first.id, second.id]);
@@ -81,8 +82,10 @@ const GamePage = () => {
         setAlertMessage("성공!");
       }, ROTATE_DURATION);
       return;
-    } else {
-      // 회전 효과 딜레이를 주기 위해 타이머 추가
+    }
+    // 매칭 실패
+    else {
+      // 효과 duration 만큼 delay 추가
       setTimeout(() => {
         setHistory((prev) => [[first.value, second.value], ...prev]);
         setFirst({});
@@ -91,9 +94,9 @@ const GamePage = () => {
       }, FLIP_BACK_DELAY);
       return;
     }
-  }, [first, second]);
+  }, [second]);
 
-  // 게임 종료 조건 충족 검사
+  // 게임 종료 검사(조건: matchedList가 변경될 때)
   useEffect(() => {
     if (matchedList.length === deckInfo.data.length) {
       const catchStopTime = time;
@@ -116,6 +119,7 @@ const GamePage = () => {
       openModal();
     }
   }, [time]);
+
   return (
     <S.GamePage>
       <Modal
@@ -140,8 +144,7 @@ const GamePage = () => {
             level={deckInfo.level}
             deckInfo={deckInfo}
             matchedList={matchedList}
-            first={first}
-            second={second}
+            openCardIds={[first.id, second.id]}
             onChangeFront={handleClickCard}
             onChangeAlert={setAlertMessage}
           />
@@ -149,26 +152,13 @@ const GamePage = () => {
       </S.GameSection>
       <S.ControlSection>
         <LevelSelector level={deckInfo.level} onReset={handleResetGame} />
-        <S.Dashboard>
-          <S.DashBoardItem>
-            <p>남은 시간</p>
-            <p className="status">{time?.toFixed(1)}0</p>
-          </S.DashBoardItem>
-          <S.DashBoardItem>
-            <p>성공한 짝</p>
-            <p className="status">{`${matchedList.length / 2}/${
-              deckInfo.data.length / 2
-            }`}</p>
-          </S.DashBoardItem>
-          <S.DashBoardItem>
-            <p>남은 짝</p>
-            <p className="status">
-              {deckInfo.data
-                ? (deckInfo.data.length - matchedList.length) / 2
-                : 0}
-            </p>
-          </S.DashBoardItem>
-        </S.Dashboard>
+        <Dashboard
+          restTime={`${time?.toFixed(1)}0`}
+          successPair={`${matchedList.length / 2}/${deckInfo.data.length / 2}`}
+          restPair={
+            deckInfo.data ? (deckInfo.data.length - matchedList.length) / 2 : 0
+          }
+        />
         <S.SubTitle>안내 메시지</S.SubTitle>
         <S.MessageBox>{alertMessage}</S.MessageBox>
         <S.SubTitle>히스토리</S.SubTitle>
