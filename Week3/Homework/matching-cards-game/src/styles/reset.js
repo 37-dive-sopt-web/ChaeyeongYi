@@ -5,6 +5,10 @@ export const ResetStyles = () => css`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   html {
@@ -28,8 +32,5 @@ export const ResetStyles = () => css`
     height: 100%;
     background-color: #e8f7ff;
     color: #223a5cff;
-    ::-webkit-scrollbar {
-      display: none;
-    }
   }
 `;

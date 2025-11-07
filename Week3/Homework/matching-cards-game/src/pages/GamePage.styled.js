@@ -41,26 +41,6 @@ export const ResetButton = styled.button`
   }
 `;
 
-export const CardBoard = styled.div`
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  grid-template-columns: ${({ $level }) => {
-    switch ($level) {
-      case 1:
-        return "repeat(4, 1fr)";
-      case 2:
-        return "repeat(6, 1fr)";
-      case 3:
-        return "repeat(6, 1fr)";
-      default:
-        return "repeat(4, 1fr)";
-    }
-  }};
-  gap: 1rem;
-  height: 90%;
-`;
-
 export const ControlSection = styled.div`
   display: flex;
   flex-direction: column;
@@ -73,8 +53,6 @@ export const ControlSection = styled.div`
   background-color: ${({ theme }) => theme.colors.primary[300]};
   border-radius: 16px;
 `;
-
-
 
 export const SubTitle = styled.p`
   font-size: 1.6rem;

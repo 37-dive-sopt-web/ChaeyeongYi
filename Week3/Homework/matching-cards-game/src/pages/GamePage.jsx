@@ -18,20 +18,28 @@ import {
 
 const GamePage = () => {
   const [deckInfo, setDeckInfo] = useState(generateDeck());
-  const { level } = deckInfo;
+  // const { level } = deckInfo;
   const [first, setFirst] = useState({});
   const [second, setSecond] = useState({});
   const [history, setHistory] = useState([]);
   const [matchedList, setMatchedList] = useState([]);
   const [alertMessage, setAlertMessage] = useState("카드를 눌러 게임을 시작");
   const [stopTime, setStopTime] = useState(null);
+
   const [_, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
-  const { time, handleTimerActive, resetTimer, stopTimer } = useTimer();
+  const { time, startTimer, resetTimer, stopTimer } = useTimer();
   const { isModalOpen, openModal, closeModal } = useModal();
 
+  /**
+   * 카드를 클릭하면 순서에 따라 first 혹은 second에 카드 정보를 저장해요.
+   * 이미 클릭한 카드이거나 매칭된 카드를 클릭한 경우 무시해요.
+   *
+   * @param {{id: number, value: number}} card - 클릭한 카드의 정보
+   * @returns {void}
+   */
   const handleClickCard = (card) => {
     if (card.id === first.id || matchedList.includes(card.id)) return;
-    handleTimerActive();
+    startTimer();
     setAlertMessage("잠시만 기다려 주세요");
     if (!first.id) {
       setFirst(card);
@@ -42,6 +50,12 @@ const GamePage = () => {
     }
   };
 
+  /**
+   * 게임 덱, 선택된 카드, 히스토리, 매칭된 카드 목록, 타이머 등을 초기 상태로 설정해요.
+   *
+   * @param {number} goalLevel - 목표 레벨
+   * @returns {void}
+   */
   const handleResetGame = (goalLevel) => {
     setDeckInfo(generateDeck(goalLevel));
     setFirst({});
@@ -107,20 +121,23 @@ const GamePage = () => {
       <Modal
         open={isModalOpen}
         onClose={() => closeModal()}
-        level={level}
+        level={deckInfo.level}
         stopTime={stopTime}
-        onAutoRestart={() => handleResetGame(level)}
+        onAutoRestart={() => handleResetGame(deckInfo.level)}
       />
       <S.GameSection>
         <S.TopDiv>
           <p>게임 보드</p>
-          <S.ResetButton type="button" onClick={() => handleResetGame(level)}>
+          <S.ResetButton
+            type="button"
+            onClick={() => handleResetGame(deckInfo.level)}
+          >
             게임 리셋
           </S.ResetButton>
         </S.TopDiv>
         {deckInfo.status === "ready" && (
           <CardBoard
-            level={level}
+            level={deckInfo.level}
             deckInfo={deckInfo}
             matchedList={matchedList}
             first={first}
@@ -131,7 +148,7 @@ const GamePage = () => {
         )}
       </S.GameSection>
       <S.ControlSection>
-        <LevelSelector level={level} onReset={handleResetGame} />
+        <LevelSelector level={deckInfo.level} onReset={handleResetGame} />
         <S.Dashboard>
           <S.DashBoardItem>
             <p>남은 시간</p>

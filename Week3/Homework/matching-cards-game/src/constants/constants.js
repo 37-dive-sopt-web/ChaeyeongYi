@@ -7,3 +7,8 @@ export const LEVEL_TIMER = {
   2: 60,
   3: 100,
 };
+export const GRID_COLUMNS = {
+  1: 4,
+  2: 6,
+  3: 6,
+};

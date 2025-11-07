@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-
-const useTimer = (initialTime = 45) => {
-  const [time, setTime] = useState(initialTime);
+import { LEVEL_TIMER } from "../constants/constants";
+const useTimer = (initialTime) => {
+  const [time, setTime] = useState(initialTime || LEVEL_TIMER[1]);
   const [isActive, setIsActive] = useState(false);
-  const handleTimerActive = () => {
+
+  const startTimer = () => {
     setIsActive(true);
   };
 
@@ -29,7 +30,7 @@ const useTimer = (initialTime = 45) => {
     return () => clearInterval(timer);
   }, [time, isActive]);
 
-  return { time, handleTimerActive, resetTimer, stopTimer };
+  return { time, startTimer, resetTimer, stopTimer };
 };
 
 export default useTimer;
