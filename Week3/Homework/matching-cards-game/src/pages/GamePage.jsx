@@ -24,10 +24,10 @@ const GamePage = () => {
   const [history, setHistory] = useState([]);
   const [matchedList, setMatchedList] = useState([]);
   const [alertMessage, setAlertMessage] = useState("카드를 눌러 게임을 시작");
-  const { isModalOpen, openModal, closeModal } = useModal();
-  const { time, handleTimerActive, resetTimer, stopTimer } = useTimer();
   const [stopTime, setStopTime] = useState(null);
   const [_, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
+  const { time, handleTimerActive, resetTimer, stopTimer } = useTimer();
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   const handleClickCard = (card) => {
     if (card.id === first.id || matchedList.includes(card.id)) return;
@@ -114,7 +114,7 @@ const GamePage = () => {
       <S.GameSection>
         <S.TopDiv>
           <p>게임 보드</p>
-          <S.ResetButton onClick={() => handleResetGame(level)}>
+          <S.ResetButton type="button" onClick={() => handleResetGame(level)}>
             게임 리셋
           </S.ResetButton>
         </S.TopDiv>

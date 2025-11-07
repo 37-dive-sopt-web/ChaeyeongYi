@@ -5,6 +5,7 @@ const LevelSelector = ({ level, onReset }) => {
     <S.LevelSelector>
       {[1, 2, 3].map((item) => (
         <S.LevelButton
+          type="button"
           key={item}
           $isActive={level === item}
           onClick={() => onReset(item)}

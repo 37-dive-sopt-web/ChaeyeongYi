@@ -14,7 +14,7 @@ const RankPage = () => {
     <S.RankPage>
       <S.TopSection>
         <p>랭킹 보드</p>
-        <S.ResetButton onClick={() => handleResetRecord()}>
+        <S.ResetButton type="button" onClick={() => handleResetRecord()}>
           기록 초기화
         </S.ResetButton>
       </S.TopSection>
