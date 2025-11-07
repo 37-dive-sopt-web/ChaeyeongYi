@@ -25,8 +25,8 @@ const GamePage = () => {
   const [matchedList, setMatchedList] = useState([]);
   const [alertMessage, setAlertMessage] = useState("카드를 눌러 게임을 시작");
   const { isModalOpen, openModal, closeModal } = useModal();
-  const { time, handleTimerActive, resetTimer, stopTimer, stopTime } =
-    useTimer();
+  const { time, handleTimerActive, resetTimer, stopTimer } = useTimer();
+  const [stopTime, setStopTime] = useState(null);
   const [_, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
 
   const handleClickCard = (card) => {
@@ -48,6 +48,7 @@ const GamePage = () => {
     setSecond({});
     setHistory([]);
     setMatchedList([]);
+    setStopTime(null);
     setAlertMessage("카드를 눌러 게임을 시작");
     resetTimer(LEVEL_TIMER[goalLevel]);
   };
@@ -81,13 +82,15 @@ const GamePage = () => {
   // 게임 종료 조건 충족 검사
   useEffect(() => {
     if (matchedList.length === deckInfo.data.length) {
+      const catchStopTime = time;
+      setStopTime(catchStopTime);
       stopTimer();
       openModal();
       const newRecord = {
         record_id: crypto.randomUUID(),
         level: deckInfo.level,
         recorded_at: new Date().toISOString(),
-        clear_time: Number((LEVEL_TIMER[deckInfo.level] - time).toFixed(2)),
+        clear_time: catchStopTime,
       };
       setRecord((prev) => [...prev, newRecord]);
     }
@@ -101,6 +104,13 @@ const GamePage = () => {
   }, [time]);
   return (
     <S.GamePage>
+      <Modal
+        open={isModalOpen}
+        onClose={() => closeModal()}
+        level={level}
+        stopTime={stopTime}
+        onAutoRestart={() => handleResetGame(level)}
+      />
       <S.GameSection>
         <S.TopDiv>
           <p>게임 보드</p>
@@ -152,13 +162,6 @@ const GamePage = () => {
           )}
         </S.HisToryBox>
       </S.ControlSection>
-      <Modal
-        open={isModalOpen}
-        onClose={() => closeModal()}
-        level={level}
-        stopTime={stopTime}
-        onAutoRestart={() => handleResetGame(level)}
-      />
     </S.GamePage>
   );
 };

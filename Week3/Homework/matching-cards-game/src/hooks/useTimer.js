@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 const useTimer = (initialTime = 45) => {
   const [time, setTime] = useState(initialTime);
   const [isActive, setIsActive] = useState(false);
-  const [stopTime, setStopTime] = useState(null);
   const handleTimerActive = () => {
     setIsActive(true);
   };
@@ -15,7 +14,6 @@ const useTimer = (initialTime = 45) => {
 
   const stopTimer = () => {
     setIsActive(false);
-    setStopTime(time);
   };
 
   useEffect(() => {
@@ -31,7 +29,7 @@ const useTimer = (initialTime = 45) => {
     return () => clearInterval(timer);
   }, [time, isActive]);
 
-  return { time, handleTimerActive, resetTimer, stopTimer, stopTime };
+  return { time, handleTimerActive, resetTimer, stopTimer };
 };
 
 export default useTimer;
