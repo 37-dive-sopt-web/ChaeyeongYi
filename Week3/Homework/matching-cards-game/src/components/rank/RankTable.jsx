@@ -26,7 +26,7 @@ const RankTable = ({ record }) => {
               <tr key={item.record_id}>
                 <td>{idx + 1}</td>
                 <td>Level {item.level}</td>
-                <td>{item.clear_time}0</td>
+                <td>{item.clear_time}</td>
                 <td>{new Date(item.recorded_at).toLocaleString()}</td>
               </tr>
             ))

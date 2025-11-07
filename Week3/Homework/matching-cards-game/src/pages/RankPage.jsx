@@ -6,7 +6,9 @@ import RankTable from "../components/rank/RankTable";
 const RankPage = () => {
   const [record, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
   const handleResetRecord = () => {
-    setRecord([]);
+    if (window.confirm("기록을 초기화하시겠습니까?")) {
+      setRecord([]);
+    }
   };
   return (
     <S.RankPage>
