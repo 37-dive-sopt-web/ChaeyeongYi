@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,8 +10,8 @@
   </head>
   <body>
     <header>
-      <p>🍅</p>
-      <h2>DIVE SOPT 웹계인</h2>
+      <span>🍅</span>
+      <h1>DIVE SOPT 웹계인</h1>
       <p>🥦SOPT 37th WEB 이채영🥦</p>
     </header>
     <main>
@@ -44,8 +44,8 @@
             <p class="left-space">역할</p>
             <select class="role-select">
               <option value="entire">전체</option>
-              <option>YB</option>
-              <option>OB</option>
+              <option value="YB">YB</option>
+              <option value="OB">OB</option>
             </select>
           </div>
           <div>
@@ -78,14 +78,16 @@
         </div>
         <table class="member-list">
           <thead>
-            <th><input type="checkbox" class="check-all" /></th>
-            <th>이름</th>
-            <th>영문 이름</th>
-            <th>깃허브</th>
-            <th>성별</th>
-            <th>역할</th>
-            <th>금잔디조</th>
-            <th>나이</th>
+            <tr>
+              <th scope="col"><input type="checkbox" class="check-all" /></th>
+              <th scope="col">이름</th>
+              <th scope="col">영문 이름</th>
+              <th scope="col">깃허브</th>
+              <th scope="col">성별</th>
+              <th scope="col">역할</th>
+              <th scope="col">금잔디조</th>
+              <th scope="col">나이</th>
+            </tr>
           </thead>
           <tbody></tbody>
         </table>
@@ -131,8 +133,8 @@
               <p>역할</p>
               <select class="modal-role-select">
                 <option value="">선택</option>
-                <option>YB</option>
-                <option>OB</option>
+                <option value="YB">YB</option>
+                <option value="OB">OB</option>
               </select>
             </div>
           </div>

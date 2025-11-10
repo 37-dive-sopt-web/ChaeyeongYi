@@ -16,7 +16,7 @@ header {
 }
 
 header > * {
-  width: 33%;
+  flex: 1;
   text-align: center;
 }
 
@@ -80,7 +80,7 @@ header :nth-child(3) {
 
 /* 반응형: 검색필터 너비 조정 */
 @media (max-width: 690px) {
-  h2 {
+  h1 {
     font-size: 18px;
   }
 

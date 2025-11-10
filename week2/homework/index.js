@@ -1,6 +1,6 @@
 import { memberMockData } from "./memberMockData.js";
 const STORAGE_KEY = "members";
-const MEMEBER_ID_KEY = "memberId";
+const MEMBER_ID_KEY = "memberId";
 
 const memberTable = document.querySelector("tbody");
 
@@ -29,7 +29,7 @@ const modalCloseBtn = document.querySelector(".close-btn");
 const addRowBtn = document.querySelector(".add-row-btn");
 const modalBackdrop = document.querySelector(".modal");
 
-let newId = localStorage.getItem(MEMEBER_ID_KEY);
+let newId = localStorage.getItem(MEMBER_ID_KEY);
 let members = initializeTable();
 
 // 테이블 초기화
@@ -38,7 +38,7 @@ function initializeTable() {
   if (!memberList) {
     memberList = [...memberMockData];
     localStorage.setItem(STORAGE_KEY, JSON.stringify(memberList));
-    localStorage.setItem(MEMEBER_ID_KEY, memberList.length + 1);
+    localStorage.setItem(MEMBER_ID_KEY, memberList.length + 1);
     newId = memberList.length + 1;
   }
   updateTable(memberList);
@@ -117,12 +117,12 @@ const implementFilter = () => {
   }
 
   // 3. 필터링 적용
-  const finalFilter = (mem, filter) => {
+  const finalFilter = (member, filter) => {
     return Object.keys(filter).every((key) => {
       const filteredValue = String(filter[key]);
       const targetValue =
-        mem[key] !== undefined && mem[key] !== null
-          ? String(mem[key]).toLowerCase()
+        member[key] !== undefined && member[key] !== null
+          ? String(member[key]).toLowerCase()
           : "";
       if (key === "gender") {
         return targetValue === filteredValue;
@@ -147,13 +147,13 @@ const deleteRow = () => {
   );
   const checkedIdList = [...checkedBoxes].map((item) => item.id);
 
-  const deletedData = members.filter((item) => {
+  const remainingData = members.filter((item) => {
     return !checkedIdList.includes(item.id.toString());
   });
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(deletedData));
-  updateTable(deletedData);
-  members = deletedData;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(remainingData));
+  updateTable(remainingData);
+  members = remainingData;
   checkAllBtn.checked = false;
   return;
 };
@@ -169,7 +169,7 @@ const checkAllRow = () => {
 };
 
 // checkAllBtn 상태 업데이트
-const updateAllcheckState = () => {
+const updateAllCheckState = () => {
   const allCheckBoxes = document.querySelectorAll("td > input[type=checkbox]");
   const checkedCheckBoxes = document.querySelectorAll(
     "td > input[type=checkbox]:checked"
@@ -209,7 +209,7 @@ const addRow = () => {
   }
   members.push(newData);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(members));
-  localStorage.setItem(MEMEBER_ID_KEY, ++newId);
+  localStorage.setItem(MEMBER_ID_KEY, ++newId);
 
   updateTable(members);
   closeModal();
@@ -224,13 +224,12 @@ const addRow = () => {
   modalAgeInput.value = "";
 };
 
-
 // 이벤트 리스너 함수 연결
 implementBtn.addEventListener("click", implementFilter);
 resetBtn.addEventListener("click", resetFilter);
 deleteBtn.addEventListener("click", deleteRow);
 checkAllBtn.addEventListener("change", checkAllRow);
-memberTable.addEventListener("change", updateAllcheckState);
+memberTable.addEventListener("change", updateAllCheckState);
 modalCloseBtn.addEventListener("click", closeModal);
 addRowBtn.addEventListener("click", addRow);
 openAddModalBtn.addEventListener("click", openModal);
