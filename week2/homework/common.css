@@ -23,13 +23,14 @@ button {
   font-weight: bold;
   cursor: pointer;
   background-color: #222222;
-  &:hover {
-    background-color: #444444;
-  }
+}
 
-  &:active {
-    background-color: #333333;
-  }
+button:hover {
+  background-color: #444444;
+}
+
+button:active {
+  background-color: #333333;
 }
 
 input,

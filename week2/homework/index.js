@@ -4,13 +4,7 @@ const MEMBER_ID_KEY = "memberId";
 
 const memberTable = document.querySelector("tbody");
 
-const nameInput = document.querySelector(".name-input");
-const engNameInput = document.querySelector(".eng-name-input");
-const githubInput = document.querySelector(".github-input");
-const genderSelect = document.querySelector(".gender-select");
-const roleSelect = document.querySelector(".role-select");
-const geumjandiInput = document.querySelector(".geumjandi-input");
-const ageInput = document.querySelector(".age-input");
+const filterForm = document.querySelector(".filter-wrapper");
 const implementBtn = document.querySelector(".implement-btn");
 const resetBtn = document.querySelector(".reset-btn");
 const checkAllBtn = document.querySelector(".check-all");
@@ -68,7 +62,7 @@ function updateTable(data) {
         id="github"
         href="https://github.com/${member.github}"
         target="_blank"
-        rel="noopenner noreferrer"
+        rel="noopener noreferrer"
       >
         ${member.github}
       </a>
@@ -80,33 +74,30 @@ function updateTable(data) {
   `;
     memberTable.appendChild(tr);
   });
+
+  checkAllBtn.checked = false;
 }
 
 // 검색 필터 초기화
 const resetFilter = () => {
-  nameInput.value = "";
-  engNameInput.value = "";
-  githubInput.value = "";
-  geumjandiInput.value = "";
-  ageInput.value = "";
-  genderSelect.selectedIndex = 0;
-  roleSelect.selectedIndex = 0;
-  return;
+  filterForm.reset();
 };
 
 // 필터 적용
 const implementFilter = () => {
+  const formData = new FormData(filterForm);
   // 1. 필터 값 가져오기
   const filters = {
-    name: nameInput.value.trim(),
-    englishName: engNameInput.value.trim(),
-    github: githubInput.value.trim(),
-    gender:
-      genderSelect.value.trim() === "entire" ? "" : genderSelect.value.trim(),
-    role: roleSelect.value.trim() === "entire" ? "" : roleSelect.value.trim(),
-    codeReviewGroup: geumjandiInput.value.trim(),
-    age: ageInput.value.trim(),
+    name: (formData.get("name") || "").trim(),
+    englishName: (formData.get("englishName") || "").trim(),
+    github: (formData.get("github") || "").trim(),
+    gender: formData.get("gender") || "",
+    role: formData.get("role") || "",
+    codeReviewGroup: (formData.get("codeReviewGroup") || "").trim(),
+    age: (formData.get("age") || "").trim(),
   };
+
+  console.log(filters);
 
   // 2. 공백이 아닌 항목만 따로 저장
   const filtersWithoutBlank = {};
@@ -188,15 +179,15 @@ const closeModal = () => {
 
 // row 추가
 const addRow = () => {
+  const formData = new FormData();
   const newData = {
-    id: Number(newId),
-    name: modalNameInput.value.trim(),
-    englishName: modalEngNameInput.value.trim(),
-    github: modalGithubInput.value.trim(),
-    gender: modalGenderSelect.value.trim(),
-    role: modalRoleSelect.value.trim(),
-    codeReviewGroup: Number(modalGeumjandiInput.value),
-    age: Number(modalAgeInput.value),
+    name: (fd.get("name") || "").trim(),
+    englishName: (fd.get("englishName") || "").trim(),
+    github: (fd.get("github") || "").trim(),
+    gender: fd.get("gender") || "",
+    role: fd.get("role") || "",
+    codeReviewGroup: (fd.get("codeReviewGroup") || "").trim(),
+    age: (fd.get("age") || "").trim(),
   };
 
   if (isNaN(newData.codeReviewGroup) || isNaN(newData.age)) {
