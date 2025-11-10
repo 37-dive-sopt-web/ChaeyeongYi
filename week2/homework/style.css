@@ -174,7 +174,6 @@ header :nth-child(3) {
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 3;
 }
-
 .modal.open {
   display: block;
 }
@@ -188,7 +187,7 @@ header :nth-child(3) {
   transform: translate(-50%, -50%);
   width: 450px;
   padding: 18px 20px;
-  background-color: white;
+  background-color: #fff;
   border-radius: 10px;
 }
 
@@ -196,37 +195,68 @@ header :nth-child(3) {
   display: flex;
   justify-content: space-between;
   padding-bottom: 20px;
-
-  .close-btn {
-    font-size: 1rem;
-    background-color: white;
-    color: black;
-    cursor: pointer;
-    margin-top: 4px;
-  }
+}
+.top-div .close-btn {
+  font-size: 1rem;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  margin-top: 4px;
 }
 
-.content-wrapper {
-  > * {
-    width: 100%;
-  }
-
-  input,
-  select {
-    margin-bottom: 10px;
-  }
-
-  .add-row-btn {
-    height: 35px;
-  }
-}
-
-.two-content-wrapper {
+.modal-form {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 14px;
+}
 
-  * {
-    width: 100%;
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-field:nth-of-type(1),
+.modal-field:nth-of-type(2),
+.modal-field:nth-of-type(3) {
+  grid-column: 1 / -1;
+}
+
+.modal-two {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 14px;
+}
+.modal-two > .modal-field {
+  grid-column: span 6;
+}
+
+.modal-actions {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.modal-actions .add-row-btn {
+  width: 100%;
+  padding: 12px 0 14px 0;
+}
+
+@media (max-width: 690px) {
+  .modal-form {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .modal-field {
+    grid-column: 1 / -1;
+  }
+  .modal-two {
+    grid-template-columns: 1fr;
+  }
+  .modal-two > .modal-field {
+    grid-column: 1 / -1;
+  }
+  .modal-actions {
+    grid-column: 1 / -1;
   }
 }

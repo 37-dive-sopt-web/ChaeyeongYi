@@ -11,14 +11,15 @@ const checkAllBtn = document.querySelector(".check-all");
 const deleteBtn = document.querySelector(".delete-btn");
 const openAddModalBtn = document.querySelector(".open-modal-btn");
 
+const modalForm = document.querySelector(".modal-form");
 const modal = document.querySelector(".modal");
-const modalNameInput = document.querySelector(".modal-name-input");
-const modalEngNameInput = document.querySelector(".modal-eng-name-input");
-const modalGithubInput = document.querySelector(".modal-github-input");
-const modalGenderSelect = document.querySelector(".modal-gender-select");
-const modalRoleSelect = document.querySelector(".modal-role-select");
-const modalGeumjandiInput = document.querySelector(".modal-geumjandi-input");
-const modalAgeInput = document.querySelector(".modal-age-input");
+// const modalNameInput = document.querySelector(".modal-name-input");
+// const modalEngNameInput = document.querySelector(".modal-eng-name-input");
+// const modalGithubInput = document.querySelector(".modal-github-input");
+// const modalGenderSelect = document.querySelector(".modal-gender-select");
+// const modalRoleSelect = document.querySelector(".modal-role-select");
+// const modalGeumjandiInput = document.querySelector(".modal-geumjandi-input");
+// const modalAgeInput = document.querySelector(".modal-age-input");
 const modalCloseBtn = document.querySelector(".close-btn");
 const addRowBtn = document.querySelector(".add-row-btn");
 const modalBackdrop = document.querySelector(".modal");
@@ -179,15 +180,15 @@ const closeModal = () => {
 
 // row 추가
 const addRow = () => {
-  const formData = new FormData();
+  const formData = new FormData(modalForm);
   const newData = {
-    name: (fd.get("name") || "").trim(),
-    englishName: (fd.get("englishName") || "").trim(),
-    github: (fd.get("github") || "").trim(),
-    gender: fd.get("gender") || "",
-    role: fd.get("role") || "",
-    codeReviewGroup: (fd.get("codeReviewGroup") || "").trim(),
-    age: (fd.get("age") || "").trim(),
+    name: (formData.get("name") || "").trim(),
+    englishName: (formData.get("englishName") || "").trim(),
+    github: (formData.get("github") || "").trim(),
+    gender: formData.get("gender") || "",
+    role: formData.get("role") || "",
+    codeReviewGroup: (formData.get("codeReviewGroup") || "").trim(),
+    age: (formData.get("age") || "").trim(),
   };
 
   if (isNaN(newData.codeReviewGroup) || isNaN(newData.age)) {
@@ -205,14 +206,7 @@ const addRow = () => {
   updateTable(members);
   closeModal();
 
-  // input 컴포넌트 리셋
-  modalNameInput.value = "";
-  modalEngNameInput.value = "";
-  modalGithubInput.value = "";
-  modalGenderSelect.selectedIndex = 0;
-  modalRoleSelect.selectedIndex = 0;
-  modalGeumjandiInput.value = "";
-  modalAgeInput.value = "";
+  modalForm.reset();
 };
 
 // 이벤트 리스너 함수 연결

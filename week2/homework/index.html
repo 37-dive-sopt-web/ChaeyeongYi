@@ -109,58 +109,85 @@
           <h3>멤버 추가</h3>
           <button type="button" class="close-btn">X</button>
         </div>
-        <div class="content-wrapper">
-          <p>이름</p>
-          <input
-            type="text"
-            class="modal-name-input"
-            placeholder="이름을 입력하세요"
-          />
-          <p>영문 이름</p>
-          <input
-            type="text"
-            class="modal-eng-name-input"
-            placeholder="영문 이름을 입력하세요"
-          />
-          <p>깃허브</p>
-          <input
-            type="text"
-            class="modal-github-input"
-            placeholder="깃허브 아이디를 입력하세요"
-          />
-          <div class="two-content-wrapper">
-            <div>
+        <form id="modal-form" class="modal-form">
+          <label class="modal-field">
+            <p>이름</p>
+            <input
+              name="name"
+              type="text"
+              placeholder="이름을 입력하세요"
+              required
+            />
+          </label>
+
+          <label class="modal-field">
+            <p>영문 이름</p>
+            <input
+              name="englishName"
+              type="text"
+              placeholder="영문 이름을 입력하세요"
+              required
+            />
+          </label>
+
+          <label class="modal-field">
+            <p>깃허브</p>
+            <input
+              name="github"
+              type="text"
+              placeholder="깃허브 아이디를 입력하세요"
+              required
+            />
+          </label>
+
+          <div class="modal-two">
+            <label class="modal-field">
               <p>성별</p>
-              <select class="modal-gender-select">
+              <select name="gender" required>
                 <option value="">선택</option>
                 <option value="female">여성</option>
                 <option value="male">남성</option>
               </select>
-            </div>
-            <div>
+            </label>
+
+            <label class="modal-field">
               <p>역할</p>
-              <select class="modal-role-select">
+              <select name="role" required>
                 <option value="">선택</option>
                 <option value="YB">YB</option>
                 <option value="OB">OB</option>
               </select>
-            </div>
+            </label>
           </div>
-          <div class="two-content-wrapper">
-            <div>
+
+          <div class="modal-two">
+            <label class="modal-field">
               <p>금잔디조</p>
               <input
-                class="modal-geumjandi-input"
+                name="codeReviewGroup"
+                type="number"
+                min="1"
+                max="9"
                 placeholder="금잔디조를 입력하세요 (1~9)"
+                required
               />
-            </div>
-            <div>
+            </label>
+
+            <label class="modal-field">
               <p>나이</p>
-              <input class="modal-age-input" placeholder="나이를 입력하세요" />
-            </div>
+              <input
+                name="age"
+                type="number"
+                placeholder="나이를 입력하세요"
+                required
+              />
+            </label>
           </div>
-          <button class="add-row-btn" type="submit">추가</button>
-        </div>
+
+          <div class="modal-actions">
+            <button class="add-row-btn" type="button">추가</button>
+          </div>
+        </form>
       </div>
     </aside>
     <script type="module" src="index.js"></script>
