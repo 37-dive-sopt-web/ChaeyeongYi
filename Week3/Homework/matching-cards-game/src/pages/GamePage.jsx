@@ -1,0 +1,177 @@
+import * as S from "./GamePage.styled";
+import { useEffect, useState } from "react";
+import useTimer from "../hooks/useTimer";
+import useModal from "../hooks/useModal";
+import useLocalstorage from "../hooks/useLocalstorage";
+import generateDeck from "../utils/generateDeck";
+import CardBoard from "../components/game/CardBoard";
+import HistoryItem from "../components/game/HistoryItem";
+import Modal from "../components/game/Modal";
+import Dashboard from "../components/game/Dashboard";
+import LevelSelector from "../components/game/LevelSelector";
+
+import {
+  ROTATE_DURATION,
+  FLIP_BACK_DELAY,
+  LOCALSTORAGE_KEY,
+  LEVEL_TIMER,
+} from "../constants/constants";
+
+const GamePage = () => {
+  const [deckInfo, setDeckInfo] = useState(generateDeck());
+  const [first, setFirst] = useState({});
+  const [second, setSecond] = useState({});
+  const [history, setHistory] = useState([]);
+  const [matchedList, setMatchedList] = useState([]);
+  const [alertMessage, setAlertMessage] = useState("카드를 눌러 게임을 시작");
+  const [stopTime, setStopTime] = useState(null);
+
+  const [_, setRecord] = useLocalstorage(LOCALSTORAGE_KEY);
+  const { time, startTimer, resetTimer, stopTimer } = useTimer();
+  const { isModalOpen, openModal, closeModal } = useModal();
+
+  /**
+   * 카드를 클릭하면 순서에 따라 first 혹은 second에 카드 정보를 저장해요.
+   * 이미 클릭한 카드이거나 매칭된 카드를 클릭한 경우 무시해요.
+   *
+   * @param {{id: number, value: number}} card - 클릭한 카드의 정보
+   * @returns {void}
+   */
+  const handleClickCard = (card) => {
+    if (card.id === first.id || matchedList.includes(card.id)) return;
+    startTimer();
+    setAlertMessage("잠시만 기다려 주세요");
+    if (!first.id) {
+      setFirst(card);
+      return;
+    }
+    if (!second.id) {
+      setSecond(card);
+    }
+  };
+
+  /**
+   * 게임 덱, 선택된 카드, 히스토리, 매칭된 카드 목록, 타이머 등을 초기 상태로 설정해요.
+   *
+   * @param {number} goalLevel - 목표 레벨
+   * @returns {void}
+   */
+  const handleResetGame = (goalLevel) => {
+    setDeckInfo(generateDeck(goalLevel));
+    setFirst({});
+    setSecond({});
+    setHistory([]);
+    setMatchedList([]);
+    setStopTime(null);
+    setAlertMessage("카드를 눌러 게임을 시작");
+    resetTimer(LEVEL_TIMER[goalLevel]);
+  };
+
+  // 매칭 검사(조건: second가 변경될 때)
+  useEffect(() => {
+    if (!first.id || !second.id) return;
+
+    // 매칭 성공
+    if (first.value === second.value) {
+      // 효과 duration 만큼 delay 추가
+      setTimeout(() => {
+        setHistory((prev) => [[first.value, second.value], ...prev]);
+        setMatchedList((prev) => [...prev, first.id, second.id]);
+        setFirst({});
+        setSecond({});
+        setAlertMessage("성공!");
+      }, ROTATE_DURATION);
+      return;
+    }
+    // 매칭 실패
+    else {
+      // 효과 duration 만큼 delay 추가
+      setTimeout(() => {
+        setHistory((prev) => [[first.value, second.value], ...prev]);
+        setFirst({});
+        setSecond({});
+        setAlertMessage("실패!");
+      }, FLIP_BACK_DELAY);
+      return;
+    }
+  }, [second]);
+
+  // 게임 종료 검사(조건: matchedList가 변경될 때)
+  useEffect(() => {
+    if (matchedList.length === deckInfo.data.length) {
+      const catchStopTime = time;
+      setStopTime(catchStopTime);
+      stopTimer();
+      openModal();
+      const newRecord = {
+        record_id: crypto.randomUUID(),
+        level: deckInfo.level,
+        recorded_at: new Date().toISOString(),
+        clear_time: catchStopTime,
+      };
+      setRecord((prev) => [...prev, newRecord]);
+    }
+  }, [matchedList]);
+
+  // 타임 아웃
+  useEffect(() => {
+    if (time <= 0) {
+      openModal();
+    }
+  }, [time]);
+
+  return (
+    <S.GamePage>
+      <Modal
+        open={isModalOpen}
+        onClose={() => closeModal()}
+        level={deckInfo.level}
+        stopTime={stopTime}
+        onAutoRestart={() => handleResetGame(deckInfo.level)}
+      />
+      <S.GameSection>
+        <S.TopDiv>
+          <p>게임 보드</p>
+          <S.ResetButton
+            type="button"
+            onClick={() => handleResetGame(deckInfo.level)}
+          >
+            게임 리셋
+          </S.ResetButton>
+        </S.TopDiv>
+        {deckInfo.status === "ready" && (
+          <CardBoard
+            level={deckInfo.level}
+            deckInfo={deckInfo}
+            matchedList={matchedList}
+            openCardIds={[first.id, second.id]}
+            onChangeFront={handleClickCard}
+            onChangeAlert={setAlertMessage}
+          />
+        )}
+      </S.GameSection>
+      <S.ControlSection>
+        <LevelSelector level={deckInfo.level} onReset={handleResetGame} />
+        <Dashboard
+          restTime={`${time?.toFixed(1)}0`}
+          successPair={`${matchedList.length / 2}/${deckInfo.data.length / 2}`}
+          restPair={
+            deckInfo.data ? (deckInfo.data.length - matchedList.length) / 2 : 0
+          }
+        />
+        <S.SubTitle>안내 메시지</S.SubTitle>
+        <S.MessageBox>{alertMessage}</S.MessageBox>
+        <S.SubTitle>히스토리</S.SubTitle>
+        <S.HisToryBox>
+          {history.length === 0 ? (
+            <S.EmptyState>아직 뒤집은 카드가 없어요</S.EmptyState>
+          ) : (
+            history.map((item, idx) => <HistoryItem key={idx} history={item} />)
+          )}
+        </S.HisToryBox>
+      </S.ControlSection>
+    </S.GamePage>
+  );
+};
+
+export default GamePage;
