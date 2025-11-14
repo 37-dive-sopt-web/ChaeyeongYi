@@ -29,4 +29,9 @@ export const ButtonWrapper = styled.button`
     background-color: #cccccc;
     cursor: default;
   }
+
+  &:hover {
+    background-color: #447ba7;
+    transition: background-color 0.1s;
+  }
 `;
