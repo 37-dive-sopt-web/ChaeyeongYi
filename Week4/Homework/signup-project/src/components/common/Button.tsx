@@ -2,13 +2,13 @@ import styled from "@emotion/styled";
 
 type ButtonProps = {
   buttonText: string;
-  handleClick: () => void;
+  onClick: () => void;
   isOk: boolean;
 };
 
-const Button = ({ buttonText, handleClick, isOk }: ButtonProps) => {
+const Button = ({ buttonText, onClick, isOk }: ButtonProps) => {
   return (
-    <ButtonWrapper type="button" onClick={handleClick} disabled={!isOk}>
+    <ButtonWrapper type="button" onClick={onClick} disabled={!isOk}>
       {buttonText}
     </ButtonWrapper>
   );

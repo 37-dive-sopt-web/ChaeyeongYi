@@ -15,7 +15,6 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const loginData: LoginRequestType = { username: id, password };
-      //   console.log("loginData:", loginData);
       const { data } = await postLogin(loginData);
       console.log("data:", data);
       localStorage.setItem("USER_ID", data.userId);
@@ -32,7 +31,7 @@ const Login = () => {
     <LoginLayout>
       <h1>로그인</h1>
       <InputContainer
-        title="로그인"
+        title="아이디"
         placeholder="아이디를 입력해주세요."
         inputState={id}
         setInputState={setId}
@@ -46,7 +45,7 @@ const Login = () => {
       <ButtonWrapper>
         <Button
           buttonText="로그인"
-          handleClick={handleLogin}
+          onClick={handleLogin}
           isOk={id !== "" && password !== ""}
         />
         <SignupBtn onClick={handleNavigateSignUp}>회원가입</SignupBtn>
