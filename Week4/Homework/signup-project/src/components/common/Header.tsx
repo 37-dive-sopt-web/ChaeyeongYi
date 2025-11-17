@@ -12,8 +12,8 @@ const Header = ({ name }: HeaderProps) => {
     { title: "내정보", onClick: () => navigate("/mypage"), path: "/mypage" },
     {
       title: "회원정보",
-      onclick: () => navigate("/userinfo"),
-      path: "/userinfo",
+      onClick: () => navigate("/mypage/members"),
+      path: "/mypage/members",
     },
     {
       title: "로그아웃",

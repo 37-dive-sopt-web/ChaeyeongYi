@@ -43,7 +43,7 @@ const InputContainerWrapper = styled.div`
 export const InputTitle = styled.p`
   font-size: 2rem;
   font-weight: 600;
-  color: #707070ff;
+  color: #707070;
 `;
 
 export const InputBox = styled.input`

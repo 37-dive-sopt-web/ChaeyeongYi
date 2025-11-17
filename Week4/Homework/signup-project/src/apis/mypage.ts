@@ -1,6 +1,6 @@
 import axiosInstance from "./axiosInstance";
 import { API_URL } from "../constants/API_URL";
-
+import type { MyInfoType } from "../types/myInfo";
 export const getUserInfo = async () => {
   try {
     const userId = localStorage.getItem("userId");
@@ -9,6 +9,22 @@ export const getUserInfo = async () => {
     return response.data.data;
   } catch (error) {
     console.error("Get User Info API error:", error);
+    throw error;
+  }
+};
+
+export const updateUserInfo = async (data: MyInfoType) => {
+  try {
+    const userId = localStorage.getItem("userId");
+
+    const response = await axiosInstance.patch(
+      `${API_URL.USER}/${userId}`,
+      data
+    );
+    console.log("Update Response:", response);
+    return response.data;
+  } catch (error) {
+    console.error("Update User Info API error:", error);
     throw error;
   }
 };

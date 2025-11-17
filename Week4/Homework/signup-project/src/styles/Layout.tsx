@@ -1,13 +1,37 @@
 import styled from "@emotion/styled";
 import Header from "../components/common/Header";
 import { Outlet } from "react-router";
+import { useState, useEffect } from "react";
+// import Button from "../components/common/Button";
+import { getUserInfo } from "../apis/mypage";
+import type { UserInfoType } from "../types/myInfo";
 
 const Layout = () => {
+  const [myInfo, setMyInfo] = useState<UserInfoType>({
+    id: 0,
+    username: "",
+    name: "",
+    email: "",
+    age: 0,
+  });
+
+  useEffect(() => {
+    const fetchMyInfo = async () => {
+      const getInfo = await getUserInfo();
+      console.log(getInfo);
+      if (getInfo) {
+        setMyInfo(getInfo);
+      }
+    };
+
+    fetchMyInfo();
+  }, []);
+
   return (
     <LayoutContainer>
-      <Header name="야호" />
+      <Header name={myInfo.name} />
       <ContentContainer>
-        <Outlet />
+        <Outlet context={{ myInfo }} />
       </ContentContainer>
     </LayoutContainer>
   );
