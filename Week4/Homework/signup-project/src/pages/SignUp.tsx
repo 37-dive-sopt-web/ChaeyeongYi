@@ -1,29 +1,43 @@
 import styled from "@emotion/styled";
-// import { postSignup } from "../apis/login";
+import { postSignup } from "../apis/login";
 import { useState } from "react";
 import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import type { SignupRequestType } from "../types/auth";
 import StepId from "../components/SignUp/StepId";
 import StepPassword from "../components/SignUp/StepPassword";
-// import { useFunnel } from "../hooks/useFunnel";
-import { useFunnel } from "../hooks/useFunnel";
+import StepInfo from "../components/SignUp/StepInfo";
 
 const SignUp = () => {
-  const [step, setStep] = useState<"아이디"|"비밀번호"|"개인정보">("아이디");
+  const navigate = useNavigate();
+  const [, setStep] = useState<"아이디" | "비밀번호" | "개인정보">(
+    "아이디"
+  );
   const [signUpData, setSignUpData] = useState<SignupRequestType>({
     username: "",
     password: "",
     name: "",
     email: "",
-    age: 0,
+    age: null,
   });
-  // const { Funnel, Step, setStep, currentStep } = useFunnel("아이디");
 
-  const setValue = (key: string, value: string | number) => {
+  const setValue = (key: string, value: string) => {
     setSignUpData((prev) => ({
       ...prev,
       [key]: value,
     }));
+  };
+
+  const handleSignUp = async () => {
+    try {
+      // console.log()
+      const data = await postSignup(signUpData);
+      alert(`회원가입 성공! ${data.data.name}님 환영합니다!`);
+      navigate("/login");
+    } catch (error) {
+      console.error("회원가입 실패:", error);
+      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
   return (
@@ -39,6 +53,23 @@ const SignUp = () => {
         setValue={(value) => setValue("password", value)}
         onNext={() => setStep("개인정보")}
       />
+      <StepInfo
+        value={{
+          name: signUpData.name,
+          email: signUpData.email,
+          age: signUpData.age,
+        }}
+        setValue={(key, value) =>
+          setSignUpData((prev) => ({
+            ...prev,
+            [key]: value,
+          }))
+        }
+        onNext={() => {
+          console.log("회원가입 데이터:", signUpData);
+          handleSignUp();
+        }}
+      />
       <span>
         이미 계정이 있나요?{" "}
         <BackToLogin to="/login">로그인으로 돌아가기</BackToLogin>
@@ -46,14 +77,6 @@ const SignUp = () => {
     </SignUpLayout>
   );
 };
-//   const handleSignUp = async () => {
-//     try {
-//       const data = await postSignup();
-//       console.log("data:", data);
-//     } catch (error) {
-//       console.error("회원가입 실패:", error);
-//     }
-//   };
 
 export default SignUp;
 

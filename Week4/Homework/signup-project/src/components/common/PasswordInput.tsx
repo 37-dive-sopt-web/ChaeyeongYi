@@ -17,7 +17,6 @@ const PasswordInput = ({
   setInputState,
 }: InputContainerProps) => {
   const handleChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setInputState(e.target.value);
   };
   const [isVisible, setIsVisible] = useState(false);

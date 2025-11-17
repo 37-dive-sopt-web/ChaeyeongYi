@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 type InputContainerProps = React.InputHTMLAttributes<HTMLInputElement> & {
   title: string;
   placeholder: string;
-  inputState: string;
+  inputState: string | number;
   setInputState: (value: string) => void;
 };
 
@@ -13,6 +13,7 @@ const InputContainer = ({
   placeholder,
   inputState,
   setInputState,
+  type,
 }: InputContainerProps) => {
   const handleChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
     setInputState(e.target.value);
@@ -24,6 +25,7 @@ const InputContainer = ({
         placeholder={placeholder}
         onChange={handleChangeInputValue}
         value={inputState}
+        type={type}
       />
     </InputContainerWrapper>
   );

@@ -17,8 +17,8 @@ const Login = () => {
     const { success, data } = await postLogin({ username: id, password });
     setIsSuccess(success);
     console.log(isSuccess);
-    localStorage.setItem("USER_ID", data.userId);
-    navigate("/home"); // 로그인 성공 시 홈으로 이동
+    localStorage.setItem("userId", data.userId);
+    navigate("/mypage"); // 로그인 성공 시 홈으로 이동
   };
 
   const handleNavigateSignUp = () => {

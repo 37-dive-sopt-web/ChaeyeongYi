@@ -15,15 +15,9 @@ export const postLogin = async (data: LoginRequestType) => {
   }
 };
 
-export const postSignup = async () => {
+export const postSignup = async (data: SignupRequestType) => {
   try {
-    const response = await axiosInstance.post(API_URL.USER, {
-      username: "cy3",
-      password: "Test1234!",
-      name: "이채영",
-      email: "cy@example.com",
-      age: 24,
-    });
+    const response = await axiosInstance.post(API_URL.USER, data);
     return response.data;
   } catch (error) {
     console.error("Signup API error:", error);

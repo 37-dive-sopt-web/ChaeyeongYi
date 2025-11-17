@@ -8,5 +8,5 @@ export interface SignupRequestType {
   password: string;
   name: string;
   email: string;
-  age: number;
+  age: number | null;
 }

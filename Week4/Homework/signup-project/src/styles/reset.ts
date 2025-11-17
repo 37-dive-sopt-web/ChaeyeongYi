@@ -31,7 +31,7 @@ export const ResetStyles = () => css`
     width: 100%;
     height: 100%;
 
-    > * {
+    > div {
       width: 50%;
       height: 60%;
     }

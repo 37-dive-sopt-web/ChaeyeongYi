@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
-import Home from "../pages/Home";
+import MyPage from "../pages/MyPage";
 
 const router = createBrowserRouter([
   {
@@ -13,9 +13,9 @@ const router = createBrowserRouter([
     Component: SignUp,
   },
   {
-    path: "/home",
-    Component: Home,
-  }
+    path: "/mypage",
+    Component: MyPage,
+  },
   //   {
   //     path: '/pokemon/:name',
   //     Component: PokemonDetail,
