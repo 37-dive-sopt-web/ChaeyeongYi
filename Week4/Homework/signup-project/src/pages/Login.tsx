@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import InputContainer from "../components/common/InputContainer";
+import PasswordInput from "../components/common/PasswordInput";
 import { useState } from "react";
 import { postLogin } from "../apis/login";
 import Button from "../components/common/Button";
@@ -32,7 +33,7 @@ const Login = () => {
         inputState={id}
         setInputState={setId}
       />
-      <InputContainer
+      <PasswordInput
         title="비밀번호"
         placeholder="비밀번호를 입력해주세요."
         inputState={password}
@@ -66,7 +67,7 @@ export const LoginLayout = styled.div`
   }
 `;
 
-export const WarningP = styled.p<{ $isSuccess: boolean }>`
+export const WarningP = styled.p<{ $isSuccess: boolean | null }>`
   display: ${(props) => (props.$isSuccess === false ? "block" : "none")};
   font-size: 1.2rem;
   color: red;
