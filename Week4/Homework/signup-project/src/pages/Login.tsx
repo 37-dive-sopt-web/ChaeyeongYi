@@ -4,24 +4,20 @@ import { useState } from "react";
 import { postLogin } from "../apis/login";
 import Button from "../components/common/Button";
 import { useNavigate } from "react-router";
-import type { LoginRequestType } from "../types/auth";
 
 const Login = () => {
   const navigate = useNavigate();
 
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
 
   const handleLogin = async () => {
-    try {
-      const loginData: LoginRequestType = { username: id, password };
-      const { data } = await postLogin(loginData);
-      console.log("data:", data);
-      localStorage.setItem("USER_ID", data.userId);
-      //   navigate("/home"); // 로그인 성공 시 홈으로 이동
-    } catch (error) {
-      console.error("로그인 실패:", error);
-    }
+    const { success, data } = await postLogin({ username: id, password });
+    setIsSuccess(success);
+    console.log(isSuccess);
+    localStorage.setItem("USER_ID", data.userId);
+    navigate("/home"); // 로그인 성공 시 홈으로 이동
   };
 
   const handleNavigateSignUp = () => {
@@ -42,6 +38,9 @@ const Login = () => {
         inputState={password}
         setInputState={setPassword}
       />
+      <WarningP $isSuccess={isSuccess}>
+        아이디 또는 비밀번호가 올바르지 않습니다.
+      </WarningP>
       <ButtonWrapper>
         <Button
           buttonText="로그인"
@@ -65,6 +64,12 @@ export const LoginLayout = styled.div`
   > h1 {
     font-size: 3.2rem;
   }
+`;
+
+export const WarningP = styled.p<{ $isSuccess: boolean }>`
+  display: ${(props) => (props.$isSuccess === false ? "block" : "none")};
+  font-size: 1.2rem;
+  color: red;
 `;
 
 export const ButtonWrapper = styled.div`
