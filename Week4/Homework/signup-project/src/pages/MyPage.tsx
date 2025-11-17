@@ -27,7 +27,8 @@ const MyPage = () => {
   }, []);
   return (
     <>
-      <Header name={myInfo?.name} />
+      {/* <Header name={myInfo?.name} /> */}
+      mypage
     </>
   );
 };

@@ -21,6 +21,7 @@ export const ResetStyles = () => css`
     border: none;
     outline: none;
     cursor: pointer;
+    background-color: transparent;
   }
 
   body {

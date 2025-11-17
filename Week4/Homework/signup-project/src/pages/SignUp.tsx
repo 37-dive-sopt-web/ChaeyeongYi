@@ -30,7 +30,6 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
     try {
-      // console.log()
       const data = await postSignup(signUpData);
       alert(`회원가입 성공! ${data.data.name}님 환영합니다!`);
       navigate("/login");
@@ -66,7 +65,6 @@ const SignUp = () => {
           }))
         }
         onNext={() => {
-          console.log("회원가입 데이터:", signUpData);
           handleSignUp();
         }}
       />

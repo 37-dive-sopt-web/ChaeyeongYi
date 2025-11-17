@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import { useLocation } from "react-router";
-import { Link } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 interface HeaderProps {
   name: string;
@@ -8,11 +7,23 @@ interface HeaderProps {
 
 const Header = ({ name }: HeaderProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const navBarArr = [
-    { title: "내정보", path: "/mypage" },
-    { title: "회원정보", path: "/members" },
-    { title: "로그아웃", path: "/login" },
-    { title: "회원탈퇴", path: "/" },
+    { title: "내정보", onClick: () => navigate("/mypage"), path: "/mypage" },
+    {
+      title: "회원정보",
+      onclick: () => navigate("/userinfo"),
+      path: "/userinfo",
+    },
+    {
+      title: "로그아웃",
+      onClick: () => {
+        localStorage.removeItem("userId");
+        navigate("/login");
+      },
+      path: "/",
+    },
+    { title: "회원탈퇴", onclick: () => navigate("/"), path: "/" },
   ];
 
   return (
@@ -25,8 +36,8 @@ const Header = ({ name }: HeaderProps) => {
         {navBarArr.map((item) => (
           <NavItem
             key={item.title}
-            to={item.path}
             $isfocus={location.pathname === item.path}
+            onClick={item.onClick}
           >
             {item.title}
           </NavItem>
@@ -74,7 +85,7 @@ const NavDiv = styled.nav`
   gap: 2rem;
 `;
 
-const NavItem = styled(Link)<{ $isfocus: boolean }>`
+const NavItem = styled.button<{ $isfocus: boolean }>`
   font-size: 1.6rem;
   text-decoration: none;
   color: white;

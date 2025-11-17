@@ -71,7 +71,6 @@ export const VisibleButton = styled.button`
   width: auto;
   height: auto;
   font-size: 2rem;
-  background-color: transparent;
   color: #707070ff;
   cursor: pointer;
 `;

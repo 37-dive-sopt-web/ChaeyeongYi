@@ -16,7 +16,6 @@ const Login = () => {
   const handleLogin = async () => {
     const { success, data } = await postLogin({ username: id, password });
     setIsSuccess(success);
-    console.log(isSuccess);
     localStorage.setItem("userId", data.userId);
     navigate("/mypage"); // 로그인 성공 시 홈으로 이동
   };
@@ -83,8 +82,7 @@ export const ButtonWrapper = styled.div`
 export const SignupBtn = styled.button`
   font-size: 1.5rem;
   margin-top: 1rem;
-  color: #4390cbff;
-  background-color: transparent;
+  color: #4390cb;
   border: none;
   cursor: pointer;
 `;

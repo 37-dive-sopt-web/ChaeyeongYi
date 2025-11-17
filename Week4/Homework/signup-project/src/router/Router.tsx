@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import MyPage from "../pages/MyPage";
+import Layout from "../styles/Layout";
+import Member from "../pages/Member";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +16,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/mypage",
-    Component: MyPage,
+    element: <Layout />,
+    children: [
+      {
+        path: "",
+        Component: MyPage,
+      },
+      {
+        path: "members",
+        Component: Member,
+      },
+    ],
   },
   //   {
   //     path: '/pokemon/:name',
