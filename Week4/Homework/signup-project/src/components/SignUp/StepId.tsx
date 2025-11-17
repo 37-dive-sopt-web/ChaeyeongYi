@@ -14,6 +14,7 @@ const StepId = ({ value, setValue, onNext }: StepIdProps) => {
         placeholder="아이디를 입력해주세요."
         inputState={value}
         setInputState={setValue}
+        type="text"
       />
       <Button buttonText="다음" onClick={onNext} isOk={value !== ""} />
     </>

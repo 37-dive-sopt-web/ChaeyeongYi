@@ -28,6 +28,10 @@ export const ButtonWrapper = styled.button`
   &:disabled {
     background-color: #cccccc;
     cursor: default;
+    &:hover {
+      background-color: #cccccc;
+      transition: none;
+    }
   }
 
   &:hover {

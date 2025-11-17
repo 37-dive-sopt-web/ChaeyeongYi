@@ -1,7 +1,7 @@
 import type { ChangeEvent } from "react";
 import styled from "@emotion/styled";
 
-type InputContainerProps = {
+type InputContainerProps = React.InputHTMLAttributes<HTMLInputElement> & {
   title: string;
   placeholder: string;
   inputState: string;

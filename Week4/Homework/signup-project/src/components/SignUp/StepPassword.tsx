@@ -1,3 +1,4 @@
+import { useState } from "react";
 import InputContainer from "../common/InputContainer";
 import Button from "../common/Button";
 
@@ -8,6 +9,7 @@ type StepPasswordProps = {
 };
 
 const StepPassword = ({ value, setValue, onNext }: StepPasswordProps) => {
+  const [checkPassword, setCheckPassword] = useState<string>("");
   return (
     <>
       <InputContainer
@@ -16,7 +18,17 @@ const StepPassword = ({ value, setValue, onNext }: StepPasswordProps) => {
         inputState={value}
         setInputState={setValue}
       />
-      <Button buttonText="다음" onClick={onNext} isOk={value !== ""} />
+      <InputContainer
+        title="비밀번호 확인"
+        placeholder="비밀번호 확인"
+        inputState={checkPassword}
+        setInputState={setCheckPassword}
+      />
+      <Button
+        buttonText="다음"
+        onClick={onNext}
+        isOk={checkPassword !== "" && value === checkPassword}
+      />
     </>
   );
 };

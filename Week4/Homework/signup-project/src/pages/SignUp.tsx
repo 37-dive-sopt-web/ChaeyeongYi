@@ -1,62 +1,48 @@
 import styled from "@emotion/styled";
-import { postSignup } from "../apis/login";
+// import { postSignup } from "../apis/login";
 import { useState } from "react";
+import { Link } from "react-router";
 import type { SignupRequestType } from "../types/auth";
 import StepId from "../components/SignUp/StepId";
 import StepPassword from "../components/SignUp/StepPassword";
+// import { useFunnel } from "../hooks/useFunnel";
+import { useFunnel } from "../hooks/useFunnel";
 
 const SignUp = () => {
-  const [step, setStep] = useState(0);
-  const [userInfo, setUserInfo] = useState<SignupRequestType>({
+  const [step, setStep] = useState<"아이디"|"비밀번호"|"개인정보">("아이디");
+  const [signUpData, setSignUpData] = useState<SignupRequestType>({
     username: "",
     password: "",
     name: "",
     email: "",
     age: 0,
   });
-
-  const ChangeNext = () => {
-    setStep((prev) => prev + 1);
-  };
+  // const { Funnel, Step, setStep, currentStep } = useFunnel("아이디");
 
   const setValue = (key: string, value: string | number) => {
-    setUserInfo({
-      ...userInfo,
+    setSignUpData((prev) => ({
+      ...prev,
       [key]: value,
-    });
+    }));
   };
-
-  const steps = [
-    <StepId
-      value={userInfo.username}
-      setValue={(value) => setValue("username", value)}
-      onNext={ChangeNext}
-    />,
-    <StepPassword
-      value={userInfo.password}
-      setValue={(value) => setValue("password", value)}
-      onNext={ChangeNext}
-    />,
-  ];
 
   return (
     <SignUpLayout>
       <h1>회원가입</h1>
-      {/* {step === 1 && (
-        <StepId
-          value={userInfo.username}
-          setValue={(value) => setValue("username", value)}
-          onNext={ChangeNext}
-        />
-      )}
-      {step === 2 && (
-        <StepPassword
-          value={userInfo.password}
-          setValue={(value) => setValue("password", value)}
-          onNext={ChangeNext}
-        />
-      )} */}
-      {steps[step]}
+      <StepId
+        value={signUpData.username}
+        setValue={(value) => setValue("username", value)}
+        onNext={() => setStep("비밀번호")}
+      />
+      <StepPassword
+        value={signUpData.password}
+        setValue={(value) => setValue("password", value)}
+        onNext={() => setStep("개인정보")}
+      />
+      <span>
+        이미 계정이 있나요?{" "}
+        <BackToLogin to="/login">로그인으로 돌아가기</BackToLogin>
+      </span>
     </SignUpLayout>
   );
 };
@@ -80,6 +66,16 @@ export const SignUpLayout = styled.div`
   > h1 {
     font-size: 3.2rem;
   }
+  > span {
+    font-size: 1.4rem;
+  }
+`;
+
+export const BackToLogin = styled(Link)`
+  color: #326c9b;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
 `;
 
 export const ButtonWrapper = styled.div`
