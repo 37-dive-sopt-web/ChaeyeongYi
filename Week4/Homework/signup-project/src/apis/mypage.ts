@@ -7,7 +7,7 @@ export const getUserInfo = async (targetId: number) => {
     const response = await axiosInstance.get(`${API_URL.USER}/${targetId}`);
     return response.data.data;
   } catch (error) {
-    console.error("Get User Info API error:", error);
+    console.error("error:", error);
   }
 };
 
@@ -22,7 +22,18 @@ export const updateUserInfo = async (data: MyInfoType) => {
     console.log("Update Response:", response);
     return response.data;
   } catch (error) {
-    console.error("Update User Info API error:", error);
+    console.error("error:", error);
+    throw error;
+  }
+};
+
+export const deleteUserAccount = async () => {
+  try {
+    const userId = localStorage.getItem("userId");
+    const response = await axiosInstance.delete(`${API_URL.USER}/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("error:", error);
     throw error;
   }
 };
