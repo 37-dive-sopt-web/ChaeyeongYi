@@ -2,12 +2,11 @@ import styled from "@emotion/styled";
 import Header from "../components/common/Header";
 import { Outlet } from "react-router";
 import { useState, useEffect } from "react";
-// import Button from "../components/common/Button";
 import { getUserInfo } from "../apis/mypage";
-import type { UserInfoType } from "../types/myInfo";
+import type { MemberDataType } from "../types/myInfo";
 
 const Layout = () => {
-  const [myInfo, setMyInfo] = useState<UserInfoType>({
+  const [myInfo, setMyInfo] = useState<MemberDataType>({
     id: 0,
     username: "",
     name: "",
@@ -17,7 +16,8 @@ const Layout = () => {
 
   useEffect(() => {
     const fetchMyInfo = async () => {
-      const getInfo = await getUserInfo();
+      const userId = localStorage.getItem("userId");
+      const getInfo = await getUserInfo(Number(userId));
       console.log(getInfo);
       if (getInfo) {
         setMyInfo(getInfo);

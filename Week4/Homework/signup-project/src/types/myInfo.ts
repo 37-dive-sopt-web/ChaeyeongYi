@@ -1,4 +1,4 @@
-export interface UserInfoType {
+export interface MemberDataType {
   id: number;
   username: string;
   name: string;

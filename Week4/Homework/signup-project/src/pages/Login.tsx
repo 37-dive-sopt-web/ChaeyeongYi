@@ -55,7 +55,7 @@ const Login = () => {
 
 export default Login;
 
-export const LoginLayout = styled.div`
+export const LoginLayout = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;

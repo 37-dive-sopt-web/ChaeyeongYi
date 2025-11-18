@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { useOutletContext } from "react-router";
-import type { MyInfoType, UserInfoType } from "../types/myInfo";
+import type { MyInfoType, MemberDataType } from "../types/myInfo";
 import Button from "../components/common/Button";
 import InputContainer from "../components/common/InputContainer";
 import { updateUserInfo } from "../apis/mypage";
 
 const MyPage = () => {
-  const { myInfo } = useOutletContext<{ myInfo: UserInfoType }>();
+  const { myInfo } = useOutletContext<{ myInfo: MemberDataType }>();
   const [updatedInfo, setUpdatedInfo] = useState<MyInfoType>({
     name: myInfo.name,
     email: myInfo.email,
@@ -64,7 +64,7 @@ const MyPage = () => {
 
 export default MyPage;
 
-const MyPageLayout = styled.div`
+const MyPageLayout = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;

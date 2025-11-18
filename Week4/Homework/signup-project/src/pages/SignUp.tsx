@@ -78,7 +78,7 @@ const SignUp = () => {
 
 export default SignUp;
 
-export const SignUpLayout = styled.div`
+export const SignUpLayout = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;

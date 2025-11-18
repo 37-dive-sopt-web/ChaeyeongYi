@@ -4,37 +4,37 @@ import styled from "@emotion/styled";
 type InputContainerProps = React.InputHTMLAttributes<HTMLInputElement> & {
   title: string;
   placeholder: string;
-  inputState: string | number;
-  setInputState: (value: string) => void;
+  inputState: number | null;
+  setInputState: (value: number | null) => void;
 };
 
-const InputContainer = ({
+const MemberInput = ({
   title,
   placeholder,
   inputState,
   setInputState,
-  type,
 }: InputContainerProps) => {
   const handleChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputState(e.target.value);
+    setInputState(Number(e.target.value));
   };
   return (
-    <InputContainerWrapper>
+    <MemberInputWrapper>
       <InputTitle>{title}</InputTitle>
       <InputBox
         placeholder={placeholder}
         onChange={handleChangeInputValue}
-        value={inputState}
-        type={type}
+        value={inputState ? inputState : ""}
+        type="number"
       />
-    </InputContainerWrapper>
+    </MemberInputWrapper>
   );
 };
 
-export default InputContainer;
+export default MemberInput;
 
-const InputContainerWrapper = styled.div`
+const MemberInputWrapper = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   width: 100%;
   gap: 1.2rem;
