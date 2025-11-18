@@ -16,10 +16,13 @@ const MyPage = () => {
   });
 
   const handleSave = async () => {
-    await updateUserInfo(updatedInfo);
-    alert("정보가 저장되었어요");
+    try {
+      await updateUserInfo(updatedInfo);
+      alert("정보가 저장되었어요");
+    } catch (err) {
+      alert("저장 실패!");
+    }
   };
-
   useEffect(() => {
     const fetchMyInfo = async () => {
       const userId = localStorage.getItem("userId");

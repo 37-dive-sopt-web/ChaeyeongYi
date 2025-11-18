@@ -22,7 +22,7 @@ export const updateUserInfo = async (data: MyInfoType) => {
     console.log("Update Response:", response);
     return response.data;
   } catch (error) {
-    console.error("error:", error);
+    console.error("updateUserInfo error:", error);
     throw error;
   }
 };
@@ -37,3 +37,4 @@ export const deleteUserAccount = async () => {
     throw error;
   }
 };
+
