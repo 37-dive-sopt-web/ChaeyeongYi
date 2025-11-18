@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router";
 import type { MyInfoType, MemberDataType } from "../types/myInfo";
 import Button from "../components/common/Button";
 import InputContainer from "../components/common/InputContainer";
 import { updateUserInfo } from "../apis/mypage";
+import { getUserInfo } from "../apis/mypage";
 
 const MyPage = () => {
   const { myInfo } = useOutletContext<{ myInfo: MemberDataType }>();
@@ -19,6 +20,23 @@ const MyPage = () => {
     alert("정보가 저장되었어요");
   };
 
+  useEffect(() => {
+    const fetchMyInfo = async () => {
+      const userId = localStorage.getItem("userId");
+      const getInfo = await getUserInfo(Number(userId));
+      // console.log(getInfo);
+      if (getInfo) {
+        setUpdatedInfo({
+          name: getInfo.name,
+          email: getInfo.email,
+          age: getInfo.age,
+        });
+      }
+    };
+
+    fetchMyInfo();
+  }, []);
+
   return (
     <MyPageLayout>
       <h1>내 정보</h1>
@@ -29,21 +47,21 @@ const MyPage = () => {
       <InputContainer
         title="이름"
         placeholder="이름을 입력해 주세요"
-        inputState={myInfo.name}
+        inputState={updatedInfo.name}
         setInputState={(v) => setUpdatedInfo((prev) => ({ ...prev, name: v }))}
         type="text"
       />
       <InputContainer
         title="이메일"
         placeholder="name@example.com"
-        inputState={myInfo.email}
+        inputState={updatedInfo.email}
         type="text"
         setInputState={(v) => setUpdatedInfo((prev) => ({ ...prev, email: v }))}
       />
       <InputContainer
         title="나이"
         placeholder="숫자로 입력"
-        inputState={myInfo.age ? myInfo.age : ""}
+        inputState={updatedInfo.age ? updatedInfo.age : ""}
         type="number"
         setInputState={(v) =>
           setUpdatedInfo((prev) => ({ ...prev, age: Number(v) }))
