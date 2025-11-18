@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import MemberInput from "../components/common/MemberInput";
+import MemberInput from "../components/Member/MemberInput";
 import Button from "../components/common/Button";
 import { useState } from "react";
 import { getUserInfo } from "../apis/mypage";

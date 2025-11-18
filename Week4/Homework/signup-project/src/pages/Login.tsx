@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import InputContainer from "../components/common/InputContainer";
-import PasswordInput from "../components/common/PasswordInput";
+import PasswordInput from "../components/SignUp/PasswordInput";
 import { useState } from "react";
 import { postLogin } from "../apis/login";
 import Button from "../components/common/Button";

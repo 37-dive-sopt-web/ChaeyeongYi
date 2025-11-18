@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PasswordInput from "../common/PasswordInput";
+import PasswordInput from "./PasswordInput";
 import Button from "../common/Button";
 import styled from "@emotion/styled";
 

@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { useLocation, useNavigate } from "react-router";
 import { deleteUserAccount } from "../../apis/mypage";
+import { useState } from "react";
+import DeleteModal from "./DeleteModal";
 interface HeaderProps {
   name: string;
 }
@@ -9,12 +11,14 @@ const Header = ({ name }: HeaderProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const handleDelete = async () => {
-    if (window.confirm("탈퇴하시겠습니까?")) {
-      deleteUserAccount();
-      localStorage.removeItem("userId");
-      navigate("/login");
-    }
+    deleteUserAccount();
+    localStorage.removeItem("userId");
+    alert("탈퇴가 완료되었습니다.");
+    navigate("/login");
   };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const navBarArr = [
     { title: "내정보", onClick: () => navigate("/mypage"), path: "/mypage" },
     {
@@ -30,7 +34,7 @@ const Header = ({ name }: HeaderProps) => {
       },
       path: "/",
     },
-    { title: "회원탈퇴", onClick: handleDelete, path: "/" },
+    { title: "회원탈퇴", onClick: () => setIsModalOpen(true), path: "/" },
   ];
 
   return (
@@ -50,6 +54,13 @@ const Header = ({ name }: HeaderProps) => {
           </NavItem>
         ))}
       </NavDiv>
+      {isModalOpen && (
+        <DeleteModal
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onDelete={handleDelete}
+        />
+      )}
     </HeaderWrapper>
   );
 };
