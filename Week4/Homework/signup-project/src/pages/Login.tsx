@@ -60,6 +60,7 @@ export const LoginLayout = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: start;
+  width: 100rem;
   gap: 1rem;
   > h1 {
     font-size: 3.2rem;

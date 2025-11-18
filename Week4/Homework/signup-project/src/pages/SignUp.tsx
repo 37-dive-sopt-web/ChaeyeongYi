@@ -10,7 +10,7 @@ import StepInfo from "../components/SignUp/StepInfo";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [, setStep] = useState<"아이디" | "비밀번호" | "개인정보">(
+  const [step, setStep] = useState<"아이디" | "비밀번호" | "개인정보">(
     "아이디"
   );
   const [signUpData, setSignUpData] = useState<SignupRequestType>({
@@ -42,32 +42,39 @@ const SignUp = () => {
   return (
     <SignUpLayout>
       <h1>회원가입</h1>
-      <StepId
-        value={signUpData.username}
-        setValue={(value) => setValue("username", value)}
-        onNext={() => setStep("비밀번호")}
-      />
-      <StepPassword
-        value={signUpData.password}
-        setValue={(value) => setValue("password", value)}
-        onNext={() => setStep("개인정보")}
-      />
-      <StepInfo
-        value={{
-          name: signUpData.name,
-          email: signUpData.email,
-          age: signUpData.age,
-        }}
-        setValue={(key, value) =>
-          setSignUpData((prev) => ({
-            ...prev,
-            [key]: value,
-          }))
-        }
-        onNext={() => {
-          handleSignUp();
-        }}
-      />
+      {step === "아이디" && (
+        <StepId
+          value={signUpData.username}
+          setValue={(value) => setValue("username", value)}
+          onNext={() => setStep("비밀번호")}
+        />
+      )}
+      {step === "비밀번호" && (
+        <StepPassword
+          value={signUpData.password}
+          setValue={(value) => setValue("password", value)}
+          onNext={() => setStep("개인정보")}
+        />
+      )}
+      {step === "개인정보" && (
+        <StepInfo
+          value={{
+            name: signUpData.name,
+            email: signUpData.email,
+            age: signUpData.age,
+          }}
+          setValue={(key, value) =>
+            setSignUpData((prev) => ({
+              ...prev,
+              [key]: value,
+            }))
+          }
+          onNext={() => {
+            handleSignUp();
+          }}
+        />
+      )}
+
       <span>
         이미 계정이 있나요?{" "}
         <BackToLogin to="/login">로그인으로 돌아가기</BackToLogin>
@@ -83,6 +90,7 @@ export const SignUpLayout = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: start;
+  width: 100rem;
   gap: 1rem;
   > h1 {
     font-size: 3.2rem;

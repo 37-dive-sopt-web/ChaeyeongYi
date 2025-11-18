@@ -99,7 +99,7 @@ const IdDiv = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 100rem;
 
   .idtitle {
     font-size: 2rem;

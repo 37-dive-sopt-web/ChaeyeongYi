@@ -5,10 +5,6 @@ export const ResetStyles = () => css`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-
-    ::-webkit-scrollbar {
-      display: none;
-    }
   }
 
   html {
@@ -31,11 +27,5 @@ export const ResetStyles = () => css`
     justify-content: center;
     width: 100%;
     height: 100%;
-
-    > div,
-    section {
-      width: 50%;
-      height: 60%;
-    }
   }
 `;

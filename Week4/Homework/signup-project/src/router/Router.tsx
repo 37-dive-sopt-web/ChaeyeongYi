@@ -28,10 +28,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  //   {
-  //     path: '/pokemon/:name',
-  //     Component: PokemonDetail,
-  //   },
 ]);
 
 export default router;

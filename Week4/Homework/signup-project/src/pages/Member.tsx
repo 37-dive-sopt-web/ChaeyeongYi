@@ -17,7 +17,7 @@ export const Member = () => {
   };
   return (
     <MemberLayout>
-      <MemberTitle>회원 조회</MemberTitle>
+      <h1>회원 조회</h1>
       <MemberInput
         title="회원 ID"
         placeholder="숫자만 입력"
@@ -63,13 +63,13 @@ const MemberLayout = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 3rem;
-  padding: 4rem 2rem;
-`;
+  width: 100rem;
 
-const MemberTitle = styled.h1`
-  font-size: 3.2rem;
-  font-weight: 700;
-  color: #326c9b;
+  > h1 {
+    font-size: 3.2rem;
+  }
+
+
 `;
 
 const MerberInfoDiv = styled.div`
