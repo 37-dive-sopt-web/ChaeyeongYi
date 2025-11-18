@@ -18,7 +18,6 @@ const Layout = () => {
     const fetchMyInfo = async () => {
       const userId = localStorage.getItem("userId");
       const getInfo = await getUserInfo(Number(userId));
-      console.log(getInfo);
       if (getInfo) {
         setMyInfo(getInfo);
       }
